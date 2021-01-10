@@ -8,6 +8,9 @@ For more information about verifying identities in AWS SES, [read the documentat
 
 At the moment only a TypeScript construct is supported.
 
+**Note:** The versioning of this construct is aligned with the AWS CDK versioning.
+This (hopefully) reduces confusion when managing your CDK dependencies.
+
 ### npm
 
 ```
