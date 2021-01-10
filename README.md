@@ -32,7 +32,7 @@ Verify an email address:
 ```
 new VerifySesEmailAddress(this, 'SesEmailVerification', {
   emailAddress: 'hello@example.org'
-})
+});
 ```
 
 ## Contributing
