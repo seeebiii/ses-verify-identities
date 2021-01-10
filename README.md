@@ -14,7 +14,7 @@ This (hopefully) reduces confusion when managing your CDK dependencies.
 ### npm
 
 ```
-    npm i --save-dev @seeebiii/ses-verify-identities
+npm i --save-dev @seeebiii/ses-verify-identities
 ```
 
 ## Usage
@@ -22,17 +22,17 @@ This (hopefully) reduces confusion when managing your CDK dependencies.
 Verify a domain:
 
 ```
-    new VerifySesDomain(this, 'SesDomainVerification', {
-      domainName: 'example.org'
-    });
+new VerifySesDomain(this, 'SesDomainVerification', {
+  domainName: 'example.org'
+});
 ```
 
 Verify an email address: 
 
 ```
-    new VerifySesEmailAddress(this, 'SesEmailVerification', {
-      emailAddress: 'hello@example.org'
-    })
+new VerifySesEmailAddress(this, 'SesEmailVerification', {
+  emailAddress: 'hello@example.org'
+})
 ```
 
 ## Contributing
