@@ -1,10 +1,12 @@
 {
-  "name": "ses-verify-identities",
-  "version": "0.1.0",
+  "name": "@seeebiii/ses-verify-identities",
+  "version": "1.82.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier '{lib,test}/**/*.ts' --write",
     "watch": "tsc -w",
     "test": "jest"
   },
@@ -12,14 +14,31 @@
     "@aws-cdk/assert": "1.82.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.4.2",
+    "prettier": "2.2.1",
     "ts-jest": "^26.2.0",
     "typescript": "~3.9.7"
   },
   "peerDependencies": {
-    "@aws-cdk/core": "1.82.0"
+    "@aws-cdk/aws-iam": "1.82.0",
+    "@aws-cdk/aws-route53": "1.82.0",
+    "@aws-cdk/aws-sns": "1.82.0",
+    "@aws-cdk/core": "1.82.0",
+    "@aws-cdk/custom-resources": "1.82.0"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.82.0"
+    "@aws-cdk/aws-iam": "1.82.0",
+    "@aws-cdk/aws-route53": "1.82.0",
+    "@aws-cdk/aws-sns": "1.82.0",
+    "@aws-cdk/core": "1.82.0",
+    "@aws-cdk/custom-resources": "1.82.0"
+  },
+  "jest": {
+    "moduleFileExtensions": ["js"]
   }
 }
