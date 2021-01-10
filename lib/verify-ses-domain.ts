@@ -25,7 +25,7 @@ export interface VerifySesDomainProps {
    */
   addDkimRecords?: boolean;
   /**
-   * A SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
+   * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
    */
   notificationTopic?: Topic;
   /**

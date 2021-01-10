@@ -19,7 +19,7 @@ npm i --save-dev @seeebiii/ses-verify-identities
 
 ## Usage
 
-Verify a domain:
+### Verify a Domain
 
 ```
 new VerifySesDomain(this, 'SesDomainVerification', {
@@ -27,13 +27,26 @@ new VerifySesDomain(this, 'SesDomainVerification', {
 });
 ```
 
-Verify an email address: 
+#### Options
+
+ * `domainName` A domain name to be used for the SES domain identity, e.g. 'example.org'
+ * `addTxtRecord` Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
+ * `addMxRecord` Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
+ * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
+ * `notificationTopic` An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
+ * `notificationTypes` Select for which notification types you want to configure a topic. Default: `[Bounce, Complaint]`.
+
+### Verify an Email Address
 
 ```
 new VerifySesEmailAddress(this, 'SesEmailVerification', {
   emailAddress: 'hello@example.org'
 });
 ```
+
+#### Options
+
+ * `emailAddress` The email address to be verified, e.g. `hello@example.org`.
 
 ## Contributing
 

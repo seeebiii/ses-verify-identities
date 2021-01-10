@@ -4,7 +4,7 @@ import { generateSesPolicyForCustomResource } from './helper';
 
 export interface VerifySesEmailAddressProps {
   /**
-   * The email address to be verified.
+   * The email address to be verified, e.g. 'hello@example.org'.
    */
   emailAddress: string;
 }
