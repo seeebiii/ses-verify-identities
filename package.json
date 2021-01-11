@@ -3,6 +3,7 @@
   "version": "1.83.0",
   "description": "AWS CDK constructs for verifying SES identities.",
   "author": "Sebastian Hesse (https://www.sebastianhesse.de)",
+  "keywords": ["aws", "aws-cdk", "aws-ses", "cdk-construct", "email", "domain", "SES identities", "SES verification"],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
