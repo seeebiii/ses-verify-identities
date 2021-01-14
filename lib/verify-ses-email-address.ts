@@ -40,7 +40,7 @@ export class VerifySesEmailAddress extends Construct {
           Identity: emailAddress
         }
       },
-      policy: generateSesPolicyForCustomResource('VerifyEmailIdentity')
+      policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity')
     });
   }
 }

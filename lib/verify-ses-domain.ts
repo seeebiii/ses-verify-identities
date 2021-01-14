@@ -89,7 +89,7 @@ export class VerifySesDomain extends Construct {
           Identity: domainName
         }
       },
-      policy: generateSesPolicyForCustomResource('VerifyDomainIdentity')
+      policy: generateSesPolicyForCustomResource('VerifyDomainIdentity', 'DeleteIdentity')
     });
   }
 
