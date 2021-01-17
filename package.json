@@ -1,6 +1,6 @@
 {
   "name": "@seeebiii/ses-verify-identities",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "AWS CDK constructs for verifying SES identities.",
   "author": "Sebastian Hesse (https://www.sebastianhesse.de)",
   "keywords": [
