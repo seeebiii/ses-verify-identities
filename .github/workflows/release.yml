@@ -20,8 +20,6 @@ jobs:
         run: npm ci
       - name: Synthesize project files
         run: npx projen
-      - name: Anti-tamper check
-        run: git diff --exit-code
       - name: Set git identity
         run: |-
           git config user.name "Auto-bump"
@@ -30,8 +28,6 @@ jobs:
         run: npx projen bump
       - name: Build
         run: npx projen build
-      - name: Anti-tamper check
-        run: git diff --exit-code
       - name: Push changes
         run: git push --follow-tags origin $BRANCH
         env:

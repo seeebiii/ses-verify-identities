@@ -76,7 +76,7 @@ const project = new AwsCdkConstructLibrary({
   // stability: undefined,                                                     /* Package's Stability. */
 
   /* NodeProjectOptions */
-  // antitamper: true,                                                         /* Checks that after build there are no modified files on git. */
+  antitamper: false,                                                         /* Checks that after build there are no modified files on git. */
   // artifactsDirectory: 'dist',                                               /* A directory which will contain artifacts to be published to npm. */
   // buildWorkflow: undefined,                                                 /* Define a GitHub workflow for building PRs. */
   // codeCov: false,                                                           /* Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret. */
