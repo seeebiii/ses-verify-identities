@@ -1,5 +1,5 @@
 {
-  "name": "ses-verify-identities",
+  "name": "@seeebiii/ses-verify-identities",
   "repository": {
     "type": "git",
     "url": "https://github.com/seeebiii/ses-verify-identities"
@@ -29,7 +29,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.85.0",
+    "@aws-cdk/assert": "1.87.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -51,21 +51,21 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-iam": "1.85.0",
-    "@aws-cdk/aws-route53": "1.85.0",
-    "@aws-cdk/aws-sns": "1.85.0",
-    "@aws-cdk/core": "1.85.0",
-    "@aws-cdk/custom-resources": "1.85.0",
-    "@aws-cdk/cx-api": "1.85.0",
+    "@aws-cdk/aws-iam": "1.87.0",
+    "@aws-cdk/aws-route53": "1.87.0",
+    "@aws-cdk/aws-sns": "1.87.0",
+    "@aws-cdk/core": "1.87.0",
+    "@aws-cdk/custom-resources": "1.87.0",
+    "@aws-cdk/cx-api": "1.87.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-iam": "1.85.0",
-    "@aws-cdk/aws-route53": "1.85.0",
-    "@aws-cdk/aws-sns": "1.85.0",
-    "@aws-cdk/core": "1.85.0",
-    "@aws-cdk/custom-resources": "1.85.0",
-    "@aws-cdk/cx-api": "1.85.0"
+    "@aws-cdk/aws-iam": "1.87.0",
+    "@aws-cdk/aws-route53": "1.87.0",
+    "@aws-cdk/aws-sns": "1.87.0",
+    "@aws-cdk/core": "1.87.0",
+    "@aws-cdk/custom-resources": "1.87.0",
+    "@aws-cdk/cx-api": "1.87.0"
   },
   "bundledDependencies": [],
   "keywords": [
@@ -79,7 +79,7 @@
     "domain",
     "email"
   ],
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "version": "3.0.0",
   "homepage": "https://github.com/seeebiii/ses-verify-identities",

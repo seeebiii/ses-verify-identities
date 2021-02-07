@@ -4,7 +4,7 @@ const { AwsCdkConstructLibrary, NodePackageManager } = require('projen');
 const project = new AwsCdkConstructLibrary({
   author: 'seeebiii',
   authorAddress: 'info@sebastianhesse.de',
-  cdkVersion: '1.85.0',
+  cdkVersion: '1.87.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'ses-verify-identities',
@@ -46,7 +46,7 @@ const project = new AwsCdkConstructLibrary({
   // deps: [],                                                                 /* Runtime dependencies of this module. */
   // description: undefined,                                                   /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: ['@types/ts-jest'], /* Build dependencies for this module. */
-  entrypoint: 'src/index.js', /* Module entrypoint (`main` in `package.json`). */
+  entrypoint: 'lib/index.js', /* Module entrypoint (`main` in `package.json`). */
   homepage: 'https://github.com/seeebiii/ses-verify-identities', /* Package's Homepage / Website. */
   keywords: ['aws',
     'aws-cdk',
@@ -66,7 +66,7 @@ const project = new AwsCdkConstructLibrary({
   // npmRegistryUrl: 'https://registry.npmjs.org',                             /* The base URL of the npm package registry. */
   // npmTaskExecution: NpmTaskExecution.PROJEN,                                /* Determines how tasks are executed when invoked as npm scripts (yarn/npm run xyz). */
   packageManager: NodePackageManager.NPM, /* The Node Package Manager used to execute scripts. */
-  // packageName: undefined,                                                   /* The "name" in package.json. */
+  packageName: '@seeebiii/ses-verify-identities', /* The "name" in package.json. */
   // peerDependencyOptions: undefined,                                         /* Options for `peerDeps`. */
   // peerDeps: [],                                                             /* Peer dependencies for this module. */
   // projenCommand: 'npx projen',                                              /* The shell command to use in order to run the projen CLI. */
@@ -81,7 +81,7 @@ const project = new AwsCdkConstructLibrary({
   // buildWorkflow: undefined,                                                 /* Define a GitHub workflow for building PRs. */
   // codeCov: false,                                                           /* Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret. */
   // codeCovTokenSecret: undefined,                                            /* Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. */
-  // copyrightOwner: undefined,                                                /* License copyright owner. */
+  copyrightOwner: 'Sebastian Hesse', /* License copyright owner. */
   // copyrightPeriod: undefined,                                               /* The copyright years to put in the LICENSE file. */
   // dependabot: true,                                                         /* Include dependabot configuration. */
   // dependabotOptions: undefined,                                             /* Options for dependabot. */
