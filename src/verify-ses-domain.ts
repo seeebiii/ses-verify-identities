@@ -1,37 +1,37 @@
-import { CfnOutput, Construct, Fn } from '@aws-cdk/core';
-import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
 import { CnameRecord, HostedZone, IHostedZone, MxRecord, TxtRecord } from '@aws-cdk/aws-route53';
 import { Topic } from '@aws-cdk/aws-sns';
-import { generateSesPolicyForCustomResource } from './helper';
+import { CfnOutput, Construct, Fn } from '@aws-cdk/core';
+import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
 import { EnvironmentPlaceholders } from '@aws-cdk/cx-api';
+import { generateSesPolicyForCustomResource } from './helper';
 
 export type NotificationType = 'Bounce' | 'Complaint' | 'Delivery';
 
-export interface VerifySesDomainProps {
+export interface IVerifySesDomainProps {
   /**
    * A domain name to be used for the SES domain identity, e.g. 'example.org'
    */
-  domainName: string;
+  readonly domainName: string;
   /**
    * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
    */
-  addTxtRecord?: boolean;
+  readonly addTxtRecord?: boolean;
   /**
    * Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
    */
-  addMxRecord?: boolean;
+  readonly addMxRecord?: boolean;
   /**
    * Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
    */
-  addDkimRecords?: boolean;
+  readonly addDkimRecords?: boolean;
   /**
    * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
    */
-  notificationTopic?: Topic;
+  readonly notificationTopic?: Topic;
   /**
    * Select for which notification types you want to configure a topic. Default: [Bounce, Complaint].
    */
-  notificationTypes?: NotificationType[];
+  readonly notificationTypes?: NotificationType[];
 }
 
 /**
@@ -45,7 +45,7 @@ export interface VerifySesDomainProps {
  *
  */
 export class VerifySesDomain extends Construct {
-  constructor(parent: Construct, name: string, props: VerifySesDomainProps) {
+  constructor(parent: Construct, name: string, props: IVerifySesDomainProps) {
     super(parent, name);
 
     const domainName = props.domainName;
@@ -78,24 +78,24 @@ export class VerifySesDomain extends Construct {
         service: 'SES',
         action: 'verifyDomainIdentity',
         parameters: {
-          Domain: domainName
+          Domain: domainName,
         },
-        physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken')
+        physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
       },
       onDelete: {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {
-          Identity: domainName
-        }
+          Identity: domainName,
+        },
       },
-      policy: generateSesPolicyForCustomResource('VerifyDomainIdentity', 'DeleteIdentity')
+      policy: generateSesPolicyForCustomResource('VerifyDomainIdentity', 'DeleteIdentity'),
     });
   }
 
   getHostedZone(domainName: string): IHostedZone {
     return HostedZone.fromLookup(this, 'Zone', {
-      domainName: domainName
+      domainName: domainName,
     });
   }
 
@@ -103,7 +103,7 @@ export class VerifySesDomain extends Construct {
     return new TxtRecord(this, 'SesVerificationRecord', {
       zone,
       recordName: `_amazonses.${domainName}`,
-      values: [verifyDomainIdentity.getResponseField('VerificationToken')]
+      values: [verifyDomainIdentity.getResponseField('VerificationToken')],
     });
   }
 
@@ -114,9 +114,9 @@ export class VerifySesDomain extends Construct {
       values: [
         {
           hostName: Fn.sub(`inbound-smtp.${EnvironmentPlaceholders.CURRENT_REGION}.amazonaws.com`),
-          priority: 10
-        }
-      ]
+          priority: 10,
+        },
+      ],
     });
   }
 
@@ -126,11 +126,11 @@ export class VerifySesDomain extends Construct {
         service: 'SES',
         action: 'verifyDomainDkim',
         parameters: {
-          Domain: domainName
+          Domain: domainName,
         },
-        physicalResourceId: PhysicalResourceId.of(domainName + '-verify-domain-dkim')
+        physicalResourceId: PhysicalResourceId.of(domainName + '-verify-domain-dkim'),
       },
-      policy: generateSesPolicyForCustomResource('VerifyDomainDkim')
+      policy: generateSesPolicyForCustomResource('VerifyDomainDkim'),
     });
   }
 
@@ -140,7 +140,7 @@ export class VerifySesDomain extends Construct {
       const cnameRecord = new CnameRecord(this, 'SesDkimVerificationRecord' + val, {
         zone,
         recordName: `${dkimToken}._domainkey.${domainName}`,
-        domainName: `${dkimToken}.dkim.amazonses.com`
+        domainName: `${dkimToken}.dkim.amazonses.com`,
       });
       cnameRecord.node.addDependency(verifyDomainDkim);
     });
@@ -150,7 +150,7 @@ export class VerifySesDomain extends Construct {
     const topic = existingTopic ?? new Topic(this, 'SesNotificationTopic');
     new CfnOutput(this, domainName + 'SesNotificationTopic', {
       value: topic.topicArn,
-      description: 'SES notification topic for ' + domainName
+      description: 'SES notification topic for ' + domainName,
     });
     topic.node.addDependency(verifyDomainIdentity);
     return topic;
@@ -171,7 +171,7 @@ export class VerifySesDomain extends Construct {
   private addSesNotificationTopicForIdentity(
     identity: string,
     notificationType: NotificationType,
-    notificationTopic: Topic
+    notificationTopic: Topic,
   ): void {
     const addTopic = new AwsCustomResource(this, `Add${notificationType}Topic-${identity}`, {
       onCreate: {
@@ -180,11 +180,11 @@ export class VerifySesDomain extends Construct {
         parameters: {
           Identity: identity,
           NotificationType: notificationType,
-          SnsTopic: notificationTopic.topicArn
+          SnsTopic: notificationTopic.topicArn,
         },
-        physicalResourceId: PhysicalResourceId.of(`${identity}-set-${notificationType}-topic`)
+        physicalResourceId: PhysicalResourceId.of(`${identity}-set-${notificationType}-topic`),
       },
-      policy: generateSesPolicyForCustomResource('SetIdentityNotificationTopic')
+      policy: generateSesPolicyForCustomResource('SetIdentityNotificationTopic'),
     });
 
     addTopic.node.addDependency(notificationTopic);

@@ -1,6 +1,6 @@
 import { countResources, expect as expectCDK, haveResourceLike } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import { VerifySesEmailAddress } from '../lib';
+import { VerifySesEmailAddress } from '../src';
 
 test('ensure custom resource exists to verify email address', () => {
   const app = new cdk.App();
@@ -8,7 +8,7 @@ test('ensure custom resource exists to verify email address', () => {
   const emailAddress = 'hello@example.org';
 
   new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
-    emailAddress: emailAddress
+    emailAddress: emailAddress,
   });
 
   expectCDK(stack).to(countResources('Custom::AWS', 1));
@@ -20,10 +20,10 @@ test('ensure custom resource exists to verify email address', () => {
         service: 'SES',
         action: 'verifyEmailIdentity',
         parameters: {
-          EmailAddress: emailAddress
-        }
-      }
-    })
+          EmailAddress: emailAddress,
+        },
+      },
+    }),
   );
 
   // ensure delete properties are as expected
@@ -33,9 +33,9 @@ test('ensure custom resource exists to verify email address', () => {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {
-          Identity: emailAddress
-        }
-      }
-    })
+          Identity: emailAddress,
+        },
+      },
+    }),
   );
 });

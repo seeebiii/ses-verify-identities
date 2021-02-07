@@ -2,11 +2,11 @@ import { Construct } from '@aws-cdk/core';
 import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
 import { generateSesPolicyForCustomResource } from './helper';
 
-export interface VerifySesEmailAddressProps {
+export interface IVerifySesEmailAddressProps {
   /**
    * The email address to be verified, e.g. 'hello@example.org'.
    */
-  emailAddress: string;
+  readonly emailAddress: string;
 }
 
 /**
@@ -19,7 +19,7 @@ export interface VerifySesEmailAddressProps {
  * })
  */
 export class VerifySesEmailAddress extends Construct {
-  constructor(parent: Construct, name: string, props: VerifySesEmailAddressProps) {
+  constructor(parent: Construct, name: string, props: IVerifySesEmailAddressProps) {
     super(parent, name);
 
     const emailAddress = props.emailAddress;
@@ -29,18 +29,18 @@ export class VerifySesEmailAddress extends Construct {
         service: 'SES',
         action: 'verifyEmailIdentity',
         parameters: {
-          EmailAddress: emailAddress
+          EmailAddress: emailAddress,
         },
-        physicalResourceId: PhysicalResourceId.of('verify-' + emailAddress)
+        physicalResourceId: PhysicalResourceId.of('verify-' + emailAddress),
       },
       onDelete: {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {
-          Identity: emailAddress
-        }
+          Identity: emailAddress,
+        },
       },
-      policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity')
+      policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity'),
     });
   }
 }
