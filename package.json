@@ -130,7 +130,23 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "java": {
+        "package": "de.sebastianhesse.cdk.ses.verify.constructs",
+        "maven": {
+          "groupId": "de.sebastianhesse.cdk-constructs",
+          "artifactId": "ses-verify-identities"
+        }
+      },
+      "python": {
+        "distName": "ses-verify-identities",
+        "module": "ses_verify_identities"
+      },
+      "dotnet": {
+        "namespace": "SebastianHesse.CdkConstructs",
+        "packageId": "Ses.Verify.Identities"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"

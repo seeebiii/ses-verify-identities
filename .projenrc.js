@@ -29,9 +29,19 @@ const project = new AwsCdkConstructLibrary({
   // eslint: true,                                                             /* Install eslint. */
   // eslintOptions: undefined,                                                 /* Eslint options. */
   // publishToGo: undefined,                                                   /* Publish Go bindings to a git repository. */
-  // publishToMaven: undefined,                                                /* Publish to maven. */
-  // publishToNuget: undefined,                                                /* Publish to NuGet. */
-  // publishToPypi: undefined,                                                 /* Publish to pypi. */
+  publishToMaven: {
+    javaPackage: 'de.sebastianhesse.cdk.ses.verify.constructs',
+    mavenGroupId: 'de.sebastianhesse.cdk-constructs',
+    mavenArtifactId: 'ses-verify-identities',
+  }, /* Publish to maven. */
+  publishToNuget: {
+    dotNetNamespace: 'SebastianHesse.CdkConstructs',
+    packageId: 'Ses.Verify.Identities',
+  }, /* Publish to NuGet. */
+  publishToPypi: {
+    distName: 'ses-verify-identities',
+    module: 'ses_verify_identities',
+  }, /* Publish to pypi. */
   // rootdir: '.',                                                             /* undefined */
 
   /* NodePackageOptions */
