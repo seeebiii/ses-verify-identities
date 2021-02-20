@@ -24,7 +24,7 @@
     "docgen": "npx projen docgen"
   },
   "author": {
-    "name": "seeebiii",
+    "name": "Sebastian Hesse",
     "email": "info@sebastianhesse.de",
     "organization": false
   },

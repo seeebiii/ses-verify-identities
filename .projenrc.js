@@ -2,7 +2,7 @@ const { ProjectType } = require('projen');
 const { AwsCdkConstructLibrary, NodePackageManager } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
-  author: 'seeebiii',
+  author: 'Sebastian Hesse',
   authorAddress: 'info@sebastianhesse.de',
   cdkVersion: '1.87.0',
   defaultReleaseBranch: 'main',
@@ -76,7 +76,7 @@ const project = new AwsCdkConstructLibrary({
   // stability: undefined,                                                     /* Package's Stability. */
 
   /* NodeProjectOptions */
-  antitamper: false,                                                         /* Checks that after build there are no modified files on git. */
+  antitamper: false, /* Checks that after build there are no modified files on git. */
   // artifactsDirectory: 'dist',                                               /* A directory which will contain artifacts to be published to npm. */
   // buildWorkflow: undefined,                                                 /* Define a GitHub workflow for building PRs. */
   // codeCov: false,                                                           /* Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v1 A secret is required for private repos. Configured with @codeCovTokenSecret. */
@@ -108,11 +108,11 @@ const project = new AwsCdkConstructLibrary({
   // pullRequestTemplateContents: undefined,                                   /* The contents of the pull request template. */
   // rebuildBot: undefined,                                                    /* Installs a GitHub workflow which is triggered when the comment "@projen rebuild" is added to a pull request. */
   // rebuildBotCommand: 'rebuild',                                             /* The pull request bot command to use in order to trigger a rebuild and commit of the contents of the branch. */
-  // releaseBranches: [ 'main' ],                                              /* Branches which trigger a release. */
-  // releaseEveryCommit: true,                                                 /* Automatically release new versions every commit to one of branches in `releaseBranches`. */
+  releaseBranches: ['main'], /* Branches which trigger a release. */
+  releaseEveryCommit: false, /* Automatically release new versions every commit to one of branches in `releaseBranches`. */
   // releaseSchedule: undefined,                                               /* CRON schedule to trigger new releases. */
-  // releaseToNpm: false,                                                      /* Automatically release to npm when new versions are introduced. */
-  // releaseWorkflow: undefined,                                               /* Define a GitHub workflow for releasing from "main" when new versions are bumped. */
+  releaseToNpm: true, /* Automatically release to npm when new versions are introduced. */
+  releaseWorkflow: true, /* Define a GitHub workflow for releasing from "main" when new versions are bumped. */
   // workflowBootstrapSteps: 'yarn install --frozen-lockfile && yarn projen',  /* Workflow steps to use in order to bootstrap this repo. */
   // workflowContainerImage: undefined,                                        /* Container image to use for GitHub workflows. */
   // workflowNodeVersion: undefined,                                           /* The node version to use in GitHub workflows. */
