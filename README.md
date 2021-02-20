@@ -8,8 +8,8 @@ For more information about verifying identities in AWS SES, [read the documentat
 
 ### npm
 
-```
-npm i --save-dev @seeebiii/ses-verify-identities
+```shell
+npm i -D @seeebiii/ses-verify-identities
 ```
 
 See more details on npmjs.com: https://www.npmjs.com/package/@seeebiii/ses-verify-identities
@@ -28,7 +28,7 @@ See more details on mvnrepository.com: https://mvnrepository.com/artifact/de.seb
 
 ### Python
 
-```
+```shell
 pip install ses-verify-identities
 ```
 
@@ -45,7 +45,7 @@ See [API.md](API.md) for a full reference.
 
 ### Verify a Domain
 
-```
+```typescript
 new VerifySesDomain(this, 'SesDomainVerification', {
   domainName: 'example.org'
 });
@@ -62,7 +62,7 @@ new VerifySesDomain(this, 'SesDomainVerification', {
 
 ### Verify an Email Address
 
-```
+```typescript
 new VerifySesEmailAddress(this, 'SesEmailVerification', {
   emailAddress: 'hello@example.org'
 });
@@ -79,11 +79,11 @@ Just open an issue or pull request :)
 
 These commands should help you while developing:
 
+ * `npx projen`         synthesize changes in [.projenrc.js](.projenrc.js) to the project
  * `npm run build`      compile typescript to js
  * `npm run watch`      watch for changes and compile
  * `npm run test`       perform the jest unit tests
  * `npm run lint`       validate code against best practices
- * `npm run prettier`   format code as configured in config
 
 ## Author
 
