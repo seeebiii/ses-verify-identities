@@ -4,20 +4,20 @@
 
 Name|Description
 ----|-----------
-[VerifySesDomain](#ses-verify-identities-verifysesdomain)|A construct to verify a SES domain identity.
-[VerifySesEmailAddress](#ses-verify-identities-verifysesemailaddress)|A construct to verify an SES email address identity.
+[VerifySesDomain](#seeebiii-ses-verify-identities-verifysesdomain)|A construct to verify a SES domain identity.
+[VerifySesEmailAddress](#seeebiii-ses-verify-identities-verifysesemailaddress)|A construct to verify an SES email address identity.
 
 
 **Interfaces**
 
 Name|Description
 ----|-----------
-[IVerifySesDomainProps](#ses-verify-identities-iverifysesdomainprops)|*No description*
-[IVerifySesEmailAddressProps](#ses-verify-identities-iverifysesemailaddressprops)|*No description*
+[IVerifySesDomainProps](#seeebiii-ses-verify-identities-iverifysesdomainprops)|*No description*
+[IVerifySesEmailAddressProps](#seeebiii-ses-verify-identities-iverifysesemailaddressprops)|*No description*
 
 
 
-## class VerifySesDomain  <a id="ses-verify-identities-verifysesdomain"></a>
+## class VerifySesDomain  <a id="seeebiii-ses-verify-identities-verifysesdomain"></a>
 
 A construct to verify a SES domain identity.
 
@@ -37,13 +37,13 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
 
 * **parent** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
-* **props** (<code>[IVerifySesDomainProps](#ses-verify-identities-iverifysesdomainprops)</code>)  *No description*
+* **props** (<code>[IVerifySesDomainProps](#seeebiii-ses-verify-identities-iverifysesdomainprops)</code>)  *No description*
 
 
 ### Methods
 
 
-#### getHostedZone(domainName) <a id="ses-verify-identities-verifysesdomain-gethostedzone"></a>
+#### getHostedZone(domainName) <a id="seeebiii-ses-verify-identities-verifysesdomain-gethostedzone"></a>
 
 
 
@@ -58,7 +58,7 @@ __Returns__:
 
 
 
-## class VerifySesEmailAddress  <a id="ses-verify-identities-verifysesemailaddress"></a>
+## class VerifySesEmailAddress  <a id="seeebiii-ses-verify-identities-verifysesemailaddress"></a>
 
 A construct to verify an SES email address identity.
 
@@ -78,12 +78,12 @@ new VerifySesEmailAddress(parent: Construct, name: string, props: IVerifySesEmai
 
 * **parent** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
-* **props** (<code>[IVerifySesEmailAddressProps](#ses-verify-identities-iverifysesemailaddressprops)</code>)  *No description*
+* **props** (<code>[IVerifySesEmailAddressProps](#seeebiii-ses-verify-identities-iverifysesemailaddressprops)</code>)  *No description*
 
 
 
 
-## interface IVerifySesDomainProps  <a id="ses-verify-identities-iverifysesdomainprops"></a>
+## interface IVerifySesDomainProps  <a id="seeebiii-ses-verify-identities-iverifysesdomainprops"></a>
 
 
 
@@ -102,7 +102,7 @@ Name | Type | Description
 
 
 
-## interface IVerifySesEmailAddressProps  <a id="ses-verify-identities-iverifysesemailaddressprops"></a>
+## interface IVerifySesEmailAddressProps  <a id="seeebiii-ses-verify-identities-iverifysesemailaddressprops"></a>
 
 
 
