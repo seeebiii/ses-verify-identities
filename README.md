@@ -6,15 +6,42 @@ For more information about verifying identities in AWS SES, [read the documentat
 
 ## Install
 
-At the moment only TypeScript/JavaScript is supported.
-
 ### npm
 
 ```
 npm i --save-dev @seeebiii/ses-verify-identities
 ```
 
+See more details on npmjs.com: https://www.npmjs.com/package/@seeebiii/ses-verify-identities
+
+### Maven
+
+```xml
+<dependency>
+  <groupId>de.sebastianhesse.cdk-constructs</groupId>
+  <artifactId>ses-verify-identities</artifactId>
+  <version>3.0.3</version>
+</dependency>
+```
+
+See more details on mvnrepository.com: https://mvnrepository.com/artifact/de.sebastianhesse.cdk-constructs/ses-verify-identities/
+
+### Python
+
+```
+pip install ses-verify-identities
+```
+
+See more details on PyPi: https://pypi.org/project/ses-verify-identities/
+
+### Dotnet / C#
+
+You can find the details here: https://www.nuget.org/packages/Ses.Verify.Identities/
+
 ## Usage
+
+Examples below are based on TypeScript.
+See [API.md](API.md) for a full reference.
 
 ### Verify a Domain
 
