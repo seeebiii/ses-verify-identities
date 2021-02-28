@@ -1,4 +1,12 @@
-import { Capture, countResources, expect as expectCDK, haveResourceLike } from '@aws-cdk/assert';
+import {
+  anything,
+  Capture,
+  countResources,
+  countResourcesLike,
+  expect as expectCDK,
+  haveResourceLike,
+} from '@aws-cdk/assert';
+import { Topic } from '@aws-cdk/aws-sns';
 import * as cdk from '@aws-cdk/core';
 import { VerifySesDomain } from '../src';
 
@@ -118,6 +126,70 @@ describe('SES domain verification', () => {
   });
 
   it('ensure custom topic is used', () => {
-    // TODO: write test
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    const topic = new Topic(stack, 'ExistingTopic', {
+      topicName: 'existing-topic-name',
+    });
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      notificationTopic: topic,
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: true,
+    });
+
+    expectCDK(stack).to(countResources('Custom::AWS', 4));
+    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
+    expectCDK(stack).to(haveResourceLike('AWS::SNS::Topic', {
+      TopicName: 'existing-topic-name',
+    }));
+  });
+
+  it('ensure custom notification types are used', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      notificationTypes: ['Bounce'],
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: true,
+    });
+
+    // since we only want to have a notification topic for Bounce, we only expect one custom resource to set a notification topic
+    expectCDK(stack).to(countResourcesLike('Custom::AWS', 1, {
+      ServiceToken: anything(),
+      Create: {
+        service: 'SES',
+        action: 'setIdentityNotificationTopic',
+        parameters: {
+          Identity: domain,
+          NotificationType: anything(),
+          SnsTopic: anything(),
+        },
+        physicalResourceId: anything(),
+      },
+      InstallLatestAwsSdk: true,
+    }));
+
+    // now check that the custom resource is configured for 'Bounce'
+    expectCDK(stack).to(haveResourceLike('Custom::AWS', {
+      ServiceToken: anything(),
+      Create: {
+        service: 'SES',
+        action: 'setIdentityNotificationTopic',
+        parameters: {
+          Identity: domain,
+          NotificationType: 'Bounce',
+          SnsTopic: anything(),
+        },
+        physicalResourceId: anything(),
+      },
+      InstallLatestAwsSdk: true,
+    }));
   });
 });
