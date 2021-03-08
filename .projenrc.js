@@ -162,10 +162,12 @@ autoMerge.addJobs({
           },
           {
             name: 'automerge',
-            uses: 'ahmadnassri/action-dependabot-auto-merge@v2',
-            with: {
-              'target': 'minor',
-              'github-token': '${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}',
+            uses: 'pascalgn/automerge-action@v0.13.1',
+            env: {
+              GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+              MERGE_LABELS: 'dependencies,!wip,!work in progress',
+              MERGE_FILTER_AUTHOR: 'dependabot',
+              MERGE_DELETE_BRANCH: 'true',
             },
           },
         ],
