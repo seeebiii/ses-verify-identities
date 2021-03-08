@@ -12,7 +12,9 @@ const project = new AwsCdkConstructLibrary({
 
   /* AwsCdkConstructLibraryOptions */
   cdkAssert: true, /* Install the @aws-cdk/assert library? */
-  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/custom-resources', '@aws-cdk/aws-sns', '@aws-cdk/aws-route53', '@aws-cdk/aws-iam', '@aws-cdk/cx-api'], /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
+  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/custom-resources',
+    '@aws-cdk/aws-sns', '@aws-cdk/aws-route53', '@aws-cdk/aws-iam',
+    '@aws-cdk/cx-api'], /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
   cdkTestDependencies: ['@aws-cdk/assert'], /* AWS CDK modules required for testing. */
   cdkVersionPinning: true, /* Use pinned version instead of caret version for CDK. */
 
@@ -136,6 +138,38 @@ const project = new AwsCdkConstructLibrary({
   // parent: undefined,                                                        /* The parent project, if this project is part of a bigger project. */
   projectType: ProjectType.LIB, /* Which type of project this is (library/app). */
   // readme: undefined,                                                        /* The README setup. */
+  dependabotOptions: {
+    autoMerge: true,
+  },
+});
+
+const autoMerge = project.github.addWorkflow('AutoMerge');
+autoMerge.on({
+  pull_requests: {
+    types: ['labeled', 'opened', 'reopened'],
+  },
+  check_suite: {
+    types: ['completed'],
+  },
+});
+autoMerge.addJobs({
+  automerge: {
+    'runs-on': 'ubuntu-latest',
+    'steps':
+        [
+          {
+            uses: 'actions/checkout@v2',
+          },
+          {
+            name: 'automerge',
+            uses: 'ahmadnassri/action-dependabot-auto-merge@v2',
+            with: {
+              'target': 'minor',
+              'github-token': '${{ secrets.GITHUB_TOKEN }}',
+            },
+          },
+        ],
+  },
 });
 
 project.synth();
