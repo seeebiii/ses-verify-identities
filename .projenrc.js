@@ -145,7 +145,7 @@ const project = new AwsCdkConstructLibrary({
 
 const autoMerge = project.github.addWorkflow('AutoMerge');
 autoMerge.on({
-  pull_requests: {
+  pull_request: {
     types: ['labeled', 'opened', 'reopened'],
   },
   check_suite: {
