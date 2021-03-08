@@ -165,7 +165,7 @@ autoMerge.addJobs({
             uses: 'ahmadnassri/action-dependabot-auto-merge@v2',
             with: {
               'target': 'minor',
-              'github-token': '${{ secrets.GITHUB_TOKEN }}',
+              'github-token': '${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}',
             },
           },
         ],
