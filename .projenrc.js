@@ -168,6 +168,7 @@ autoMerge.addJobs({
               MERGE_LABELS: 'dependencies,!wip,!work in progress',
               MERGE_FILTER_AUTHOR: 'dependabot[bot]',
               MERGE_DELETE_BRANCH: 'true',
+              MERGE_RETRY_SLEEP: '60000',
             },
           },
         ],
