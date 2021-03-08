@@ -166,7 +166,7 @@ autoMerge.addJobs({
             env: {
               GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
               MERGE_LABELS: 'dependencies,!wip,!work in progress',
-              MERGE_FILTER_AUTHOR: 'dependabot',
+              MERGE_FILTER_AUTHOR: 'dependabot[bot]',
               MERGE_DELETE_BRANCH: 'true',
             },
           },
