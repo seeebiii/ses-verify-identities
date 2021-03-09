@@ -29,7 +29,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.91.0",
+    "@aws-cdk/assert": "^1.92.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -51,21 +51,21 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-iam": "^1.91.0",
-    "@aws-cdk/aws-route53": "^1.91.0",
-    "@aws-cdk/aws-sns": "^1.91.0",
-    "@aws-cdk/core": "^1.91.0",
-    "@aws-cdk/custom-resources": "^1.91.0",
-    "@aws-cdk/cx-api": "^1.91.0",
+    "@aws-cdk/aws-iam": "^1.92.0",
+    "@aws-cdk/aws-route53": "^1.92.0",
+    "@aws-cdk/aws-sns": "^1.92.0",
+    "@aws-cdk/core": "^1.92.0",
+    "@aws-cdk/custom-resources": "^1.92.0",
+    "@aws-cdk/cx-api": "^1.92.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-iam": "^1.91.0",
-    "@aws-cdk/aws-route53": "^1.91.0",
-    "@aws-cdk/aws-sns": "^1.91.0",
-    "@aws-cdk/core": "^1.91.0",
-    "@aws-cdk/custom-resources": "^1.91.0",
-    "@aws-cdk/cx-api": "^1.91.0"
+    "@aws-cdk/aws-iam": "^1.92.0",
+    "@aws-cdk/aws-route53": "^1.92.0",
+    "@aws-cdk/aws-sns": "^1.92.0",
+    "@aws-cdk/core": "^1.92.0",
+    "@aws-cdk/custom-resources": "^1.92.0",
+    "@aws-cdk/cx-api": "^1.92.0"
   },
   "bundledDependencies": [],
   "keywords": [
