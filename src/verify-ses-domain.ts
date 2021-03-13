@@ -13,23 +13,28 @@ export interface IVerifySesDomainProps {
    */
   readonly domainName: string;
   /**
-   * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
+   * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * @default true
    */
   readonly addTxtRecord?: boolean;
   /**
-   * Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
+   * Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * @default true
    */
   readonly addMxRecord?: boolean;
   /**
-   * Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: true.
+   * Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * @default true
    */
   readonly addDkimRecords?: boolean;
   /**
    * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
+   * @default new topic will be created
    */
   readonly notificationTopic?: Topic;
   /**
-   * Select for which notification types you want to configure a topic. Default: [Bounce, Complaint].
+   * Select for which notification types you want to configure a topic.
+   * @default [Bounce, Complaint]
    */
   readonly notificationTypes?: NotificationType[];
 }

@@ -16,7 +16,8 @@ export interface IVerifySesEmailAddressProps {
  *
  * new VerifySesEmailAddress(this, 'SesEmailVerification', {
  *   emailAddress: 'hello@example.org'
- * })
+ * });
+ *
  */
 export class VerifySesEmailAddress extends Construct {
   constructor(parent: Construct, name: string, props: IVerifySesEmailAddressProps) {
