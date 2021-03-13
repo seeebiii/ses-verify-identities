@@ -16,7 +16,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-sns', '@aws-cdk/aws-route53', '@aws-cdk/aws-iam',
     '@aws-cdk/cx-api'], /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
   cdkTestDependencies: ['@aws-cdk/assert'], /* AWS CDK modules required for testing. */
-  cdkVersionPinning: true, /* Use pinned version instead of caret version for CDK. */
+  cdkVersionPinning: false, /* Use pinned version instead of caret version for CDK. */
 
   /* ConstructLibraryOptions */
   catalog: {
