@@ -3,8 +3,11 @@ import {
   Capture,
   countResources,
   countResourcesLike,
+  deepObjectLike,
+  encodedJson,
   expect as expectCDK,
   haveResourceLike,
+  stringLike,
 } from '@aws-cdk/assert';
 import { Topic } from '@aws-cdk/aws-sns';
 import * as cdk from '@aws-cdk/core';
@@ -33,20 +36,20 @@ describe('SES domain verification', () => {
     expectCDK(stack).to(countResources('Custom::AWS', 3));
     expectCDK(stack).to(
       haveResourceLike('Custom::AWS', {
-        Create: {
+        Create: encodedJson(deepObjectLike({
           service: 'SES',
           action: 'verifyDomainIdentity',
           parameters: {
             Domain: domain,
           },
-        },
-        Delete: {
+        })),
+        Delete: encodedJson(deepObjectLike({
           service: 'SES',
           action: 'deleteIdentity',
           parameters: {
             Identity: domain,
           },
-        },
+        })),
       }),
     );
     expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
@@ -163,32 +166,26 @@ describe('SES domain verification', () => {
     // since we only want to have a notification topic for Bounce, we only expect one custom resource to set a notification topic
     expectCDK(stack).to(countResourcesLike('Custom::AWS', 1, {
       ServiceToken: anything(),
-      Create: {
-        service: 'SES',
-        action: 'setIdentityNotificationTopic',
-        parameters: {
-          Identity: domain,
-          NotificationType: anything(),
-          SnsTopic: anything(),
-        },
-        physicalResourceId: anything(),
-      },
+      Create: deepObjectLike({
+        'Fn::Join': [
+          '', [stringLike(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\"*`), anything(), anything()],
+        ],
+      }),
       InstallLatestAwsSdk: true,
     }));
 
     // now check that the custom resource is configured for 'Bounce'
     expectCDK(stack).to(haveResourceLike('Custom::AWS', {
       ServiceToken: anything(),
-      Create: {
-        service: 'SES',
-        action: 'setIdentityNotificationTopic',
-        parameters: {
-          Identity: domain,
-          NotificationType: 'Bounce',
-          SnsTopic: anything(),
-        },
-        physicalResourceId: anything(),
-      },
+      Create: deepObjectLike({
+        'Fn::Join': [
+          '', [
+            stringLike(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\",\"NotificationType\":\"Bounce\"*`),
+            anything(),
+            anything(),
+          ],
+        ],
+      }),
       InstallLatestAwsSdk: true,
     }));
   });
