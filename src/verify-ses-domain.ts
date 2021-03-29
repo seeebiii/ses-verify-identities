@@ -87,6 +87,14 @@ export class VerifySesDomain extends Construct {
         },
         physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
       },
+      onUpdate: {
+        service: 'SES',
+        action: 'verifyDomainIdentity',
+        parameters: {
+          Domain: domainName,
+        },
+        physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
+      },
       onDelete: {
         service: 'SES',
         action: 'deleteIdentity',
@@ -128,6 +136,14 @@ export class VerifySesDomain extends Construct {
   private initDkimVerification(domainName: string) {
     return new AwsCustomResource(this, 'VerifyDomainDkim', {
       onCreate: {
+        service: 'SES',
+        action: 'verifyDomainDkim',
+        parameters: {
+          Domain: domainName,
+        },
+        physicalResourceId: PhysicalResourceId.of(domainName + '-verify-domain-dkim'),
+      },
+      onUpdate: {
         service: 'SES',
         action: 'verifyDomainDkim',
         parameters: {
