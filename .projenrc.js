@@ -1,5 +1,5 @@
 const { ProjectType } = require('projen');
-const { AwsCdkConstructLibrary, NodePackageManager } = require('projen');
+const { AwsCdkConstructLibrary } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
@@ -53,7 +53,6 @@ const project = new AwsCdkConstructLibrary({
     'SES verification'],
   license: 'MIT',
   licensed: true,
-  packageManager: NodePackageManager.NPM,
   packageName: '@seeebiii/ses-verify-identities',
   repository: 'https://github.com/seeebiii/ses-verify-identities',
 
@@ -69,7 +68,7 @@ const project = new AwsCdkConstructLibrary({
   },
   npmignore: ['.github'],
   releaseBranches: ['main'],
-  releaseEveryCommit: false,
+  releaseEveryCommit: true,
   releaseToNpm: true,
   releaseWorkflow: true,
 
