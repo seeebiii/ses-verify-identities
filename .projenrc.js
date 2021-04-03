@@ -4,7 +4,7 @@ const { AwsCdkConstructLibrary } = require('projen');
 const project = new AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
   authorAddress: 'info@sebastianhesse.de',
-  cdkVersion: '1.95.1',
+  cdkVersion: '1.96.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'ses-verify-identities',

@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@aws-cdk/assert@^1.95.1":
+"@aws-cdk/assert@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-1.96.0.tgz#cf5abaf04a6004dd8f1e1ed33cc7c1994c199345"
   integrity sha512-IcnV35/g1L8BlceMS5h/aAYXR/pecR8ltbRGxMK/f9nArjrg2Nn7fowM7B1PxdrSFpbBzcEL4Lm8G+hXFmxfcg==
@@ -136,7 +136,7 @@
     "@aws-cdk/core" "1.96.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-iam@1.96.0", "@aws-cdk/aws-iam@^1.95.1":
+"@aws-cdk/aws-iam@1.96.0", "@aws-cdk/aws-iam@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.96.0.tgz#6c179296e4d9d16ac596fadab6410ddc03ca4d34"
   integrity sha512-ikpmhDFgmhZmvU89aVon0BVtJS85ez/VqlE9Xvo3UBEKjoCt5ptvIX9tqbqlBp3FwKWvOEXVgKE81kn5OWvDWg==
@@ -191,7 +191,7 @@
     "@aws-cdk/core" "1.96.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-route53@^1.95.1":
+"@aws-cdk/aws-route53@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-route53/-/aws-route53-1.96.0.tgz#966f6dfb3fd9572ad5cfadb76a7f73cbfc1d30e3"
   integrity sha512-9fLrM+cP9hKPbhH1SGKuqSs0p4uYIg4KHjkB9JMUMc/DJ0jE9r+uOA5Hx3YLUCBf70AfTdjzaiUpnwaNWQdDkQ==
@@ -237,7 +237,7 @@
     "@aws-cdk/core" "1.96.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-sns@1.96.0", "@aws-cdk/aws-sns@^1.95.1":
+"@aws-cdk/aws-sns@1.96.0", "@aws-cdk/aws-sns@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sns/-/aws-sns-1.96.0.tgz#eaf848e1c6c1b172d98b6dd52dd766e59a590c00"
   integrity sha512-r7IfRHkVnqmEgoU10QdJQwMy8fqfmtPoRfPqFHDUWSdsSR361UW2O36mOn4m69UJv2L08EjjPn2ZdltqwQAHIg==
@@ -299,7 +299,7 @@
     string-width "^4.2.2"
     table "^6.0.9"
 
-"@aws-cdk/core@1.96.0", "@aws-cdk/core@^1.95.1":
+"@aws-cdk/core@1.96.0", "@aws-cdk/core@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/core/-/core-1.96.0.tgz#7a3984c28bce6ff8e2b6d9d732b556b3edd7bfc6"
   integrity sha512-W8pAE2n9WgBDi0uHe0rUb95sVUe+rIe8pWZuHq60HhD5Omjb7qVxV5D95Z8TOkOrbLbCYJEUjsLV/ka0iqMOnQ==
@@ -313,7 +313,7 @@
     ignore "^5.1.8"
     minimatch "^3.0.4"
 
-"@aws-cdk/custom-resources@1.96.0", "@aws-cdk/custom-resources@^1.95.1":
+"@aws-cdk/custom-resources@1.96.0", "@aws-cdk/custom-resources@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/custom-resources/-/custom-resources-1.96.0.tgz#905dcb76ff10af9d12e93be886d774cfccb51964"
   integrity sha512-zQ6bVX+5kTeDs1Jw1viSC5s62sGiok1/ZGlvJ5lyFXtg6NCX+hKPmt+eZYJAAmFSRwMPWw+kD4+OWXFfSNJ2Lg==
@@ -327,7 +327,7 @@
     "@aws-cdk/core" "1.96.0"
     constructs "^3.3.69"
 
-"@aws-cdk/cx-api@1.96.0", "@aws-cdk/cx-api@^1.95.1":
+"@aws-cdk/cx-api@1.96.0", "@aws-cdk/cx-api@^1.96.0":
   version "1.96.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-1.96.0.tgz#5e62c5e9f862236d01fc6d8fc3966b08714b47f3"
   integrity sha512-LiPWV1ALunni72XU6BywqyCxHDIMUsDQ0HYfRak37hAstAOhdqeUOlnG3goB9MTkMF7FOcU61a/izGDlVwPXQg==
