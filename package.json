@@ -5,8 +5,6 @@
     "url": "https://github.com/seeebiii/ses-verify-identities"
   },
   "scripts": {
-    "projen": "npx projen",
-    "start": "npx projen start",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "test:compile": "npx projen test:compile",
@@ -21,7 +19,9 @@
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "docgen": "npx projen docgen",
+    "projen": "npx projen",
+    "start": "npx projen start"
   },
   "author": {
     "name": "Sebastian Hesse",
@@ -45,7 +45,7 @@
     "jsii-docgen": "^1.8.36",
     "jsii-pacmak": "^1.20.1",
     "json-schema": "^0.3.0",
-    "projen": "^0.16.38",
+    "projen": "^0.17.20",
     "standard-version": "^9",
     "ts-jest": "^26.5.0",
     "typescript": "^3.9.5"

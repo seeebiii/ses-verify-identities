@@ -35,7 +35,6 @@ yarn-error.log*
 !/.github/pull_request_template.md
 !/.github/workflows/automerge.yml
 !/.github/workflows/build.yml
-!/.github/workflows/rebuild-bot.yml
 !/.github/workflows/release.yml
 !/.mergify.yml
 !/.npmignore

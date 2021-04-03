@@ -68,7 +68,7 @@ const project = new AwsCdkConstructLibrary({
   },
   npmignore: ['.github'],
   releaseBranches: ['main'],
-  releaseEveryCommit: false,
+  releaseEveryCommit: true,
   releaseToNpm: true,
   releaseWorkflow: true,
 

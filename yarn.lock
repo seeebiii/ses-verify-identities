@@ -3211,6 +3211,11 @@ ini@^1.3.2:
   resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha1-op2kJbSIBvNHZ6Tvzjlyaa8oQyw=
 
+ini@^2.0.0:
+  version "2.0.0"
+  resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/ini/-/ini-2.0.0.tgz#e5fd556ecdd5726be978fa1001862eacb0a94bc5"
+  integrity sha1-5f1Vbs3VcmvpePoQAYYurLCpS8U=
+
 inquirer@^7.3.3:
   version "7.3.3"
   resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/inquirer/-/inquirer-7.3.3.tgz#04d176b2af04afc157a83fd7c100e98ee0aad003"
@@ -5073,16 +5078,17 @@ progress@^2.0.0:
   resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha1-foz42PW48jnBvGi+tOt4Vn1XLvg=
 
-projen@^0.16.38:
-  version "0.16.42"
-  resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/projen/-/projen-0.16.42.tgz#821f2087f841a5b63aa2e25c724c16b3ae0c6c3a"
-  integrity sha1-gh8gh/hBpbY6ouJcckwWs64MbDo=
+projen@^0.17.20:
+  version "0.17.20"
+  resolved "https://fast.cloud.scout24.com/artifactory/api/npm/npm/projen/-/projen-0.17.20.tgz#32b1e096c5d9c4a5e848bd04ff305f40ccaf3493"
+  integrity sha1-MrHglsXZxKXoSL0E/zBfQMyvNJM=
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.0"
     decamelize "^4.0.0"
     fs-extra "^9.0.1"
     glob "^7"
+    ini "^2.0.0"
     inquirer "^7.3.3"
     semver "^7.3.2"
     xmlbuilder2 "^2.4.0"
