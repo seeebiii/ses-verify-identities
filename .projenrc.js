@@ -53,7 +53,6 @@ const project = new AwsCdkConstructLibrary({
     'SES verification'],
   license: 'MIT',
   licensed: true,
-  packageManager: NodePackageManager.NPM,
   packageName: '@seeebiii/ses-verify-identities',
   repository: 'https://github.com/seeebiii/ses-verify-identities',
 
