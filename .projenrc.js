@@ -1,5 +1,5 @@
 const { ProjectType } = require('projen');
-const { AwsCdkConstructLibrary, NodePackageManager } = require('projen');
+const { AwsCdkConstructLibrary } = require('projen');
 
 const project = new AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
