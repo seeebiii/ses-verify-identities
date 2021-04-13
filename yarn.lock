@@ -55,15 +55,6 @@
     "@aws-cdk/cx-api" "1.98.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-cloudwatch@1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudwatch/-/aws-cloudwatch-1.96.0.tgz#3721c2dacaeb8db5b5e77c78a798dd0533075dd3"
-  integrity sha512-vlYf3Jay+srt1A6SOX5/fcFWQmXcouTzDWQovvg36DWPNknH2dF9nHpf7YrEesj7Nwxlo9aA0MrFBYqThlsy3w==
-  dependencies:
-    "@aws-cdk/aws-iam" "1.96.0"
-    "@aws-cdk/core" "1.96.0"
-    constructs "^3.3.69"
-
 "@aws-cdk/aws-cloudwatch@1.98.0":
   version "1.98.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudwatch/-/aws-cloudwatch-1.98.0.tgz#3a344b5f51d174efba3f138e1007301553d08a92"
@@ -136,15 +127,6 @@
     "@aws-cdk/cx-api" "1.98.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-events@1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-events/-/aws-events-1.96.0.tgz#0992fa7a77cf17a6eb577808ba8e8c5153763704"
-  integrity sha512-sbfwjyvpRiDIKnJ9T4wDyv9e1783bzHPBalZqoUCmITXEDzETM1JR6lvsEbnIdzLlutx2MALIL4fKc9lWmeMVA==
-  dependencies:
-    "@aws-cdk/aws-iam" "1.96.0"
-    "@aws-cdk/core" "1.96.0"
-    constructs "^3.3.69"
-
 "@aws-cdk/aws-events@1.98.0":
   version "1.98.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-events/-/aws-events-1.98.0.tgz#c87f07c7a920be7e6368c970d530a1d52dbfe23e"
@@ -154,15 +136,6 @@
     "@aws-cdk/core" "1.98.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-iam@1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.96.0.tgz#6c179296e4d9d16ac596fadab6410ddc03ca4d34"
-  integrity sha512-ikpmhDFgmhZmvU89aVon0BVtJS85ez/VqlE9Xvo3UBEKjoCt5ptvIX9tqbqlBp3FwKWvOEXVgKE81kn5OWvDWg==
-  dependencies:
-    "@aws-cdk/core" "1.96.0"
-    "@aws-cdk/region-info" "1.96.0"
-    constructs "^3.3.69"
-
 "@aws-cdk/aws-iam@1.98.0", "@aws-cdk/aws-iam@^1.96.0":
   version "1.98.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-iam/-/aws-iam-1.98.0.tgz#98189af33636a6baed9c6fbbed924eef80f63f07"
@@ -170,16 +143,6 @@
   dependencies:
     "@aws-cdk/core" "1.98.0"
     "@aws-cdk/region-info" "1.98.0"
-    constructs "^3.3.69"
-
-"@aws-cdk/aws-kms@1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-kms/-/aws-kms-1.96.0.tgz#38be78453e42a98260c31aba58135fa2d6f332a7"
-  integrity sha512-yNtEsekR188JEFbS0AD5kDXUD2kQnzJd69GV+mNUcJtmwbJQVzs8m/wnZaVcx+Q8+qLEXPro2H0evCfyExJR5w==
-  dependencies:
-    "@aws-cdk/aws-iam" "1.96.0"
-    "@aws-cdk/core" "1.96.0"
-    "@aws-cdk/cx-api" "1.96.0"
     constructs "^3.3.69"
 
 "@aws-cdk/aws-kms@1.98.0":
@@ -274,7 +237,7 @@
     "@aws-cdk/core" "1.98.0"
     constructs "^3.3.69"
 
-"@aws-cdk/aws-sns@1.98.0":
+"@aws-cdk/aws-sns@1.98.0", "@aws-cdk/aws-sns@^1.96.0":
   version "1.98.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sns/-/aws-sns-1.98.0.tgz#73e3fa092a1c146a5bfcdb9862c972f4a1519a1e"
   integrity sha512-Di8Lrv8fRSitmRmAiJu0MTPptNggjCTTluZr48Uf3xTNL3QQ5Byjm/jb3IljgnoFGxFXkU0SqJi1KaLxJXZ1vg==
@@ -285,30 +248,6 @@
     "@aws-cdk/aws-kms" "1.98.0"
     "@aws-cdk/aws-sqs" "1.98.0"
     "@aws-cdk/core" "1.98.0"
-    constructs "^3.3.69"
-
-"@aws-cdk/aws-sns@^1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sns/-/aws-sns-1.96.0.tgz#eaf848e1c6c1b172d98b6dd52dd766e59a590c00"
-  integrity sha512-r7IfRHkVnqmEgoU10QdJQwMy8fqfmtPoRfPqFHDUWSdsSR361UW2O36mOn4m69UJv2L08EjjPn2ZdltqwQAHIg==
-  dependencies:
-    "@aws-cdk/aws-cloudwatch" "1.96.0"
-    "@aws-cdk/aws-events" "1.96.0"
-    "@aws-cdk/aws-iam" "1.96.0"
-    "@aws-cdk/aws-kms" "1.96.0"
-    "@aws-cdk/aws-sqs" "1.96.0"
-    "@aws-cdk/core" "1.96.0"
-    constructs "^3.3.69"
-
-"@aws-cdk/aws-sqs@1.96.0":
-  version "1.96.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sqs/-/aws-sqs-1.96.0.tgz#3503a19de876e03a662f9ef606ec0533e3c9283c"
-  integrity sha512-d5IbcqqxP3ZVB25WEYVKhpXg0LVXphply+yyMIxoF7wWh6oGxXJUGOXLErYxJtz4vzlV+2wKwv2zBaIrzhXeFw==
-  dependencies:
-    "@aws-cdk/aws-cloudwatch" "1.96.0"
-    "@aws-cdk/aws-iam" "1.96.0"
-    "@aws-cdk/aws-kms" "1.96.0"
-    "@aws-cdk/core" "1.96.0"
     constructs "^3.3.69"
 
 "@aws-cdk/aws-sqs@1.98.0":
