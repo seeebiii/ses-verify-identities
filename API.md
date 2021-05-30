@@ -93,10 +93,11 @@ new VerifySesEmailAddress(parent: Construct, name: string, props: IVerifySesEmai
 
 Name | Type | Description 
 -----|------|-------------
-**domainName** | <code>string</code> | A domain name to be used for the SES domain identity, e.g. 'example.org'.
+**domainName** | <code>string</code> | A domain name to be used for the SES domain identity, e.g. 'sub-domain.example.org'.
 **addDkimRecords**? | <code>boolean</code> | Whether to automatically add DKIM records to the hosted zone of your domain.<br/>__*Default*__: true
 **addMxRecord**? | <code>boolean</code> | Whether to automatically add a MX record to the hosted zone of your domain.<br/>__*Default*__: true
 **addTxtRecord**? | <code>boolean</code> | Whether to automatically add a TXT record to the hosed zone of your domain.<br/>__*Default*__: true
+**hostedZoneName**? | <code>string</code> | A hostedZone name to be matched with Route 53 record.<br/>__*Default*__: same as domainName
 **notificationTopic**? | <code>[Topic](#aws-cdk-aws-sns-topic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
 
