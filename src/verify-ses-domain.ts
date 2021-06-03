@@ -9,9 +9,14 @@ export type NotificationType = 'Bounce' | 'Complaint' | 'Delivery';
 
 export interface IVerifySesDomainProps {
   /**
-   * A domain name to be used for the SES domain identity, e.g. 'example.org'
+   * A domain name to be used for the SES domain identity, e.g. 'sub-domain.example.org'
    */
   readonly domainName: string;
+  /**
+   * A hostedZone name to be matched with Route 53 record. e.g. 'example.org'
+   * @default same as domainName
+   */
+  readonly hostedZoneName?: string;
   /**
    * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
    * @default true
@@ -58,7 +63,8 @@ export class VerifySesDomain extends Construct {
     const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, props.notificationTopic);
     this.addTopicToDomainIdentity(domainName, topic, props.notificationTypes);
 
-    const zone = this.getHostedZone(domainName);
+    const hostedZoneName = props.hostedZoneName ? props.hostedZoneName : domainName;
+    const zone = this.getHostedZone(hostedZoneName);
 
     if (isTrueOrUndefined(props.addTxtRecord)) {
       const txtRecord = this.createTxtRecordLinkingToSes(zone, domainName, verifyDomainIdentity);

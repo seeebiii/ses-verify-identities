@@ -13,12 +13,13 @@ import { Topic } from '@aws-cdk/aws-sns';
 import * as cdk from '@aws-cdk/core';
 import { VerifySesDomain } from '../src';
 
-const domain = 'example.org';
+const domain = 'sub-domain.example.org';
+const hostedZoneName = 'example.org';
 const hostedZoneId = '12345';
 const zoneName = domain + '.';
 VerifySesDomain.prototype.getHostedZone = jest.fn().mockReturnValue({
   HostedZoneId: hostedZoneId,
-  zoneName: zoneName,
+  zoneName: hostedZoneName,
 });
 
 describe('SES domain verification', () => {
@@ -28,6 +29,7 @@ describe('SES domain verification', () => {
 
     new VerifySesDomain(stack, 'VerifyExampleDomain', {
       domainName: domain,
+      hostedZoneName,
       addTxtRecord: false,
       addMxRecord: false,
       addDkimRecords: false,
