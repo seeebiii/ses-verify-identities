@@ -54,6 +54,7 @@ new VerifySesDomain(this, 'SesDomainVerification', {
 #### Options
 
  * `domainName` A domain name to be used for the SES domain identity, e.g. 'example.org'
+ * `hostedZoneName` A hostedZone name to be matched with Route 53 record. e.g. 'example.org'. Default: same as domainName.
  * `addTxtRecord` Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addMxRecord` Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
@@ -71,6 +72,7 @@ new VerifySesEmailAddress(this, 'SesEmailVerification', {
 #### Options
 
  * `emailAddress` The email address to be verified, e.g. `hello@example.org`.
+ * `region` An optional AWS region to validate the email address. Default: The custom resource will be created in the stack region.
 
 ## Contributing
 
