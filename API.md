@@ -114,6 +114,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **emailAddress** | <code>string</code> | The email address to be verified, e.g. 'hello@example.org'.
+**region**? | <code>string</code> | An optional AWS region to validate the email address.<br/>__*Default*__: The custom resource will be created in the stack region
 
 
 
