@@ -7,6 +7,11 @@ export interface IVerifySesEmailAddressProps {
    * The email address to be verified, e.g. 'hello@example.org'.
    */
   readonly emailAddress: string;
+  /**
+   * An optional AWS region to validate the email address.
+   * @default The custom resource will be created in the stack region
+   */
+  readonly region?: string;
 }
 
 /**
@@ -24,6 +29,7 @@ export class VerifySesEmailAddress extends Construct {
     super(parent, name);
 
     const emailAddress = props.emailAddress;
+    const region = props.region;
 
     new AwsCustomResource(this, 'VerifyEmailIdentity' + emailAddress, {
       onCreate: {
@@ -33,6 +39,7 @@ export class VerifySesEmailAddress extends Construct {
           EmailAddress: emailAddress,
         },
         physicalResourceId: PhysicalResourceId.of('verify-' + emailAddress),
+        region,
       },
       onDelete: {
         service: 'SES',
@@ -40,6 +47,7 @@ export class VerifySesEmailAddress extends Construct {
         parameters: {
           Identity: emailAddress,
         },
+        region,
       },
       policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity'),
     });
