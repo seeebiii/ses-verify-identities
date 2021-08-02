@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/seeebiii/ses-verify-identities/compare/v3.1.3...v3.2.0) (2021-08-02)
+
+
+### Features
+
+* option region for VerifySesEmailAddress ([266d291](https://github.com/seeebiii/ses-verify-identities/commit/266d291ec2904e6edb59504179c6733bfde9bdd9))
+
 ### [3.1.3](https://github.com/seeebiii/ses-verify-identities/compare/v3.1.2...v3.1.3) (2021-06-03)
 
 ### [3.1.2](https://github.com/seeebiii/ses-verify-identities/compare/v3.1.1...v3.1.2) (2021-04-03)
