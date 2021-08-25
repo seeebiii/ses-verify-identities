@@ -886,10 +886,18 @@
     chalk "^4.1.2"
     semver "^7.3.5"
 
-"@jsii/spec@^1.30.0", "@jsii/spec@^1.33.0":
-  version "1.33.0"
-  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.33.0.tgz#0cd8cf3dec506b0002ce2de6ed51671e9500b7bf"
-  integrity sha512-JUu4NhmFQiLnzegaj4gJ5xAt7YjB2fUteJppIN/J49TQJd1kWxsFFmYIMJDuUiAUzo0Gx99N4YqgcfKK3kLAbQ==
+"@jsii/check-node@1.34.0":
+  version "1.34.0"
+  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.34.0.tgz#24da38da36e18639c84787dabd464b8474ddee22"
+  integrity sha512-Z+eGyIoV6B6RNFCR+Z/p0ANnZA++bmCXhoU1RIwGh9RG39PAT38KkZZNr9ZHNTTQbVoTJMSatoX/9WQ33pQxAw==
+  dependencies:
+    chalk "^4.1.2"
+    semver "^7.3.5"
+
+"@jsii/spec@^1.30.0", "@jsii/spec@^1.33.0", "@jsii/spec@^1.34.0":
+  version "1.34.0"
+  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.34.0.tgz#8b78adf07518f567d2c44bf6c98c426e5c18e0cf"
+  integrity sha512-yAK8FrTRrZ3lQ+DmdyAFZuHmsTJ1ej0719+sVgjr5ahE9i64huStaraX/jJM+PniuUQwE7N+B49ue6X9qj7vJA==
   dependencies:
     jsonschema "^1.4.0"
 
@@ -1111,14 +1119,6 @@
     "@typescript-eslint/typescript-estree" "4.29.3"
     debug "^4.3.1"
 
-"@typescript-eslint/scope-manager@4.29.2":
-  version "4.29.2"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.29.2.tgz#442b0f029d981fa402942715b1718ac7fcd5aa1b"
-  integrity sha512-mfHmvlQxmfkU8D55CkZO2sQOueTxLqGvzV+mG6S/6fIunDiD2ouwsAoiYCZYDDK73QCibYjIZmGhpvKwAB5BOA==
-  dependencies:
-    "@typescript-eslint/types" "4.29.2"
-    "@typescript-eslint/visitor-keys" "4.29.2"
-
 "@typescript-eslint/scope-manager@4.29.3":
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.29.3.tgz#497dec66f3a22e459f6e306cf14021e40ec86e19"
@@ -1127,28 +1127,10 @@
     "@typescript-eslint/types" "4.29.3"
     "@typescript-eslint/visitor-keys" "4.29.3"
 
-"@typescript-eslint/types@4.29.2":
-  version "4.29.2"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.29.2.tgz#fc0489c6b89773f99109fb0aa0aaddff21f52fcd"
-  integrity sha512-K6ApnEXId+WTGxqnda8z4LhNMa/pZmbTFkDxEBLQAbhLZL50DjeY0VIDCml/0Y3FlcbqXZrABqrcKxq+n0LwzQ==
-
 "@typescript-eslint/types@4.29.3":
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.29.3.tgz#d7980c49aef643d0af8954c9f14f656b7fd16017"
   integrity sha512-s1eV1lKNgoIYLAl1JUba8NhULmf+jOmmeFO1G5MN/RBCyyzg4TIOfIOICVNC06lor+Xmy4FypIIhFiJXOknhIg==
-
-"@typescript-eslint/typescript-estree@4.29.2":
-  version "4.29.2"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-4.29.2.tgz#a0ea8b98b274adbb2577100ba545ddf8bf7dc219"
-  integrity sha512-TJ0/hEnYxapYn9SGn3dCnETO0r+MjaxtlWZ2xU+EvytF0g4CqTpZL48SqSNn2hXsPolnewF30pdzR9a5Lj3DNg==
-  dependencies:
-    "@typescript-eslint/types" "4.29.2"
-    "@typescript-eslint/visitor-keys" "4.29.2"
-    debug "^4.3.1"
-    globby "^11.0.3"
-    is-glob "^4.0.1"
-    semver "^7.3.5"
-    tsutils "^3.21.0"
 
 "@typescript-eslint/typescript-estree@4.29.3":
   version "4.29.3"
@@ -1162,14 +1144,6 @@
     is-glob "^4.0.1"
     semver "^7.3.5"
     tsutils "^3.21.0"
-
-"@typescript-eslint/visitor-keys@4.29.2":
-  version "4.29.2"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.29.2.tgz#d2da7341f3519486f50655159f4e5ecdcb2cd1df"
-  integrity sha512-bDgJLQ86oWHJoZ1ai4TZdgXzJxsea3Ee9u9wsTAvjChdj2WLcVsgWYAPeY7RQMn16tKrlQaBnpKv7KBfs4EQag==
-  dependencies:
-    "@typescript-eslint/types" "4.29.2"
-    eslint-visitor-keys "^2.0.0"
 
 "@typescript-eslint/visitor-keys@4.29.3":
   version "4.29.3"
@@ -4233,12 +4207,12 @@ jsii-rosetta@^1.33.0:
     yargs "^16.2.0"
 
 jsii@^1.20.1:
-  version "1.33.0"
-  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.33.0.tgz#b6086e31799583c91b86802fe627a0865123004b"
-  integrity sha512-0WIWlrRtoQNrp7iyEyNMoPRzvjd2EK8/Zgn/tWyzpjaMZur9HevZuk4lduCthTly/Gs9A7u1Ajdyp1cBrALeBQ==
+  version "1.34.0"
+  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.34.0.tgz#d009d7ae36f069819f97dcade4203722a5ec524f"
+  integrity sha512-z/p8cuWdRntQzdZ1Fq/hvXHPjq/HjZhQzTF/GmYrH3s7Wsb14LphHGAENTZwICBaSovoqSRIboOb2FbPLsCjoA==
   dependencies:
-    "@jsii/check-node" "1.33.0"
-    "@jsii/spec" "^1.33.0"
+    "@jsii/check-node" "1.34.0"
+    "@jsii/spec" "^1.34.0"
     case "^1.6.3"
     colors "^1.4.0"
     deep-equal "^2.0.5"
