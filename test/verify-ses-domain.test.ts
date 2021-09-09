@@ -153,6 +153,86 @@ describe('SES domain verification', () => {
     }));
   });
 
+  it('ensure custom region is used', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const region = 'us-east-1';
+
+    new VerifySesDomain(stack, 'VerifyExampleEmail', {
+      domainName: domain,
+      hostedZoneName,
+      region,
+    });
+
+    expectCDK(stack).to(countResources('Custom::AWS', 4));
+    expectCDK(stack).to(
+      haveResourceLike('Custom::AWS', {
+        Create: encodedJson(deepObjectLike({
+          service: 'SES',
+          action: 'verifyDomainIdentity',
+          parameters: {
+            Domain: domain,
+          },
+          region,
+        })),
+        Update: encodedJson(deepObjectLike({
+          service: 'SES',
+          action: 'verifyDomainIdentity',
+          parameters: {
+            Domain: domain,
+          },
+          region,
+        })),
+        Delete: encodedJson(deepObjectLike({
+          service: 'SES',
+          action: 'deleteIdentity',
+          parameters: {
+            Identity: domain,
+          },
+          region,
+        })),
+      }),
+    );
+    expectCDK(stack).to(
+      haveResourceLike('Custom::AWS', {
+        Create: encodedJson(deepObjectLike({
+          service: 'SES',
+          action: 'verifyDomainDkim',
+          parameters: {
+            Domain: domain,
+          },
+          region,
+        })),
+        Update: encodedJson(deepObjectLike({
+          service: 'SES',
+          action: 'verifyDomainDkim',
+          parameters: {
+            Domain: domain,
+          },
+          region,
+        })),
+      }),
+    );
+    expectCDK(stack).to(
+      haveResourceLike('Custom::AWS', {
+        Create: {
+          'Fn::Join': [
+            '',
+            [
+              '{"service":"SES","action":"setIdentityNotificationTopic","parameters":{"Identity":"sub-domain.example.org","NotificationType":"Bounce","SnsTopic":"',
+              {
+                Ref: 'VerifyExampleEmailSesNotificationTopicA0B1D9A8',
+              },
+              '"},"physicalResourceId":{"id":"sub-domain.example.org-set-Bounce-topic"},"region":"us-east-1"}',
+            ],
+          ],
+        },
+      }),
+    );
+    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
+    expectCDK(stack).to(countResources('AWS::Route53::RecordSet', 5));
+  });
+
   it('ensure custom notification types are used', () => {
     const app = new cdk.App();
     const stack = new cdk.Stack(app, 'TestStack');

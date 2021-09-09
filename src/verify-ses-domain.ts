@@ -42,6 +42,11 @@ export interface IVerifySesDomainProps {
    * @default [Bounce, Complaint]
    */
   readonly notificationTypes?: NotificationType[];
+  /**
+   * An optional AWS region to validate the domain name.
+   * @default The custom resource will be created in the stack region
+   */
+  readonly region?: string;
 }
 
 /**
@@ -55,10 +60,14 @@ export interface IVerifySesDomainProps {
  *
  */
 export class VerifySesDomain extends Construct {
+  private readonly region: string | undefined;
+
   constructor(parent: Construct, name: string, props: IVerifySesDomainProps) {
     super(parent, name);
 
     const domainName = props.domainName;
+    this.region = props.region;
+
     const verifyDomainIdentity = this.verifyDomainIdentity(domainName);
     const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, props.notificationTopic);
     this.addTopicToDomainIdentity(domainName, topic, props.notificationTypes);
@@ -92,6 +101,7 @@ export class VerifySesDomain extends Construct {
           Domain: domainName,
         },
         physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
+        region: this.region,
       },
       onUpdate: {
         service: 'SES',
@@ -100,6 +110,7 @@ export class VerifySesDomain extends Construct {
           Domain: domainName,
         },
         physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
+        region: this.region,
       },
       onDelete: {
         service: 'SES',
@@ -107,6 +118,7 @@ export class VerifySesDomain extends Construct {
         parameters: {
           Identity: domainName,
         },
+        region: this.region,
       },
       policy: generateSesPolicyForCustomResource('VerifyDomainIdentity', 'DeleteIdentity'),
     });
@@ -148,6 +160,7 @@ export class VerifySesDomain extends Construct {
           Domain: domainName,
         },
         physicalResourceId: PhysicalResourceId.of(domainName + '-verify-domain-dkim'),
+        region: this.region,
       },
       onUpdate: {
         service: 'SES',
@@ -156,6 +169,7 @@ export class VerifySesDomain extends Construct {
           Domain: domainName,
         },
         physicalResourceId: PhysicalResourceId.of(domainName + '-verify-domain-dkim'),
+        region: this.region,
       },
       policy: generateSesPolicyForCustomResource('VerifyDomainDkim'),
     });
@@ -210,6 +224,7 @@ export class VerifySesDomain extends Construct {
           SnsTopic: notificationTopic.topicArn,
         },
         physicalResourceId: PhysicalResourceId.of(`${identity}-set-${notificationType}-topic`),
+        region: this.region,
       },
       policy: generateSesPolicyForCustomResource('SetIdentityNotificationTopic'),
     });

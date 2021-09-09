@@ -100,7 +100,7 @@ Name | Type | Description
 **hostedZoneName**? | <code>string</code> | A hostedZone name to be matched with Route 53 record.<br/>__*Default*__: same as domainName
 **notificationTopic**? | <code>[Topic](#aws-cdk-aws-sns-topic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
-
+**region**? | <code>string</code> | An optional AWS region to validate the domain.<br/>__*Default*__: The custom resource will be created in the stack region
 
 
 ## interface IVerifySesEmailAddressProps  <a id="seeebiii-ses-verify-identities-iverifysesemailaddressprops"></a>
