@@ -370,7 +370,7 @@
     "@aws-cdk/core" "1.122.0"
     constructs "^3.3.69"
 
-"@aws-cdk/cx-api@1.122.0", "@aws-cdk/cx-api@^1.96.0":
+"@aws-cdk/cx-api@1.122.0":
   version "1.122.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-1.122.0.tgz#431f3a5a7ec339fdfff0387e85f2e5956a43fb17"
   integrity sha512-x2SPWc3RNBWi5UBdq/gZvW5He9X5NRb2j9pcBcUPhVSSEB7Fl5lqPU82q8mBy+76zHkfWILpLGJr/jNQ4ZRAeA==
@@ -378,7 +378,7 @@
     "@aws-cdk/cloud-assembly-schema" "1.122.0"
     semver "^7.3.5"
 
-"@aws-cdk/cx-api@1.123.0":
+"@aws-cdk/cx-api@1.123.0", "@aws-cdk/cx-api@^1.96.0":
   version "1.123.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-1.123.0.tgz#4639f00f98dd02122becff13ea985c98904a1461"
   integrity sha512-Vhc7/LJj4b/xIbDuH9+4ycrXMlGS/BjiBWDzbN37NOVVvEdb7+4g0FQ+hcGIFQhWSOGAK5rjpFKQF0jH4XpOIQ==
