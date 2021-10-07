@@ -879,14 +879,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jsii/check-node@1.36.0":
-  version "1.36.0"
-  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.36.0.tgz#010db7eb8477f96cc491d9433b3003634764205a"
-  integrity sha512-/WgRJ93hg7a6H/VTOhE9366VjvrW5HU0wGtO/i3zskxBpK6LmpnYhw69AiGvmAZHyBaUuJ2KGCSa7TEge62NwA==
-  dependencies:
-    chalk "^4.1.2"
-    semver "^7.3.5"
-
 "@jsii/check-node@1.37.0":
   version "1.37.0"
   resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.37.0.tgz#33fe8f590bd93c18048ce973aa07cd4bd4cc2028"
@@ -895,10 +887,18 @@
     chalk "^4.1.2"
     semver "^7.3.5"
 
-"@jsii/spec@^1.30.0", "@jsii/spec@^1.36.0", "@jsii/spec@^1.37.0":
-  version "1.37.0"
-  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.37.0.tgz#397ea1e87d771c05be239febb420d1647a3cb48a"
-  integrity sha512-KppLbmeBSQOkFLvd1Rnv4+P1u+jax8wODp5QzvvNu0GaPXn976stXPw+AFzXxT3XMSrFdbGaRXyaSaKPai8n2g==
+"@jsii/check-node@1.38.0":
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.38.0.tgz#4d9df1aac07d69401da240a3fff456f55c2b3e3d"
+  integrity sha512-VlEu2/nqxgGHVlfMlzGCPN3ivS3iPNjXSLSHLNCxHzjumcVjJnj88KzrIXrtNy3Dwuy72ulQYJp7aa/TSsCZNw==
+  dependencies:
+    chalk "^4.1.2"
+    semver "^7.3.5"
+
+"@jsii/spec@^1.30.0", "@jsii/spec@^1.37.0", "@jsii/spec@^1.38.0":
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.38.0.tgz#503ae6c0c7e4deae48857ffff1e6a11d318d533e"
+  integrity sha512-SvZU6QxH1HOlHuXJhzHcaoflGqx4PXlNbva9Ox73qw2P/QuNY0H8/MIB/dZniT01H1nVDGVJm7/4Se6eSWKzdQ==
   dependencies:
     jsonschema "^1.4.0"
 
@@ -4157,14 +4157,14 @@ jsesc@^2.5.1:
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
 jsii-diff@^1.20.1:
-  version "1.37.0"
-  resolved "https://registry.yarnpkg.com/jsii-diff/-/jsii-diff-1.37.0.tgz#b959e13bddde2c8280e9edad9653d8c5cc7e9705"
-  integrity sha512-B+JoXQgO3uGh8LPx1fKpXmsNpq30jytQOdLY+LszQTEWJ8Kqy+GOifK9gCW6HTb0X2XqhEZF01c4zabA3qT2tg==
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/jsii-diff/-/jsii-diff-1.38.0.tgz#a7fcc2e3eab9d5eec57fca2f41d4380c45e1920b"
+  integrity sha512-aBrqOCYZ5PvjCZ29tabYaELh9OtsAKYpiYP3enzPMo7yLuGJUODtJuZhtJCeMAaz9cbadj121f6EinwDyYhIgA==
   dependencies:
-    "@jsii/check-node" "1.37.0"
-    "@jsii/spec" "^1.37.0"
+    "@jsii/check-node" "1.38.0"
+    "@jsii/spec" "^1.38.0"
     fs-extra "^9.1.0"
-    jsii-reflect "^1.37.0"
+    jsii-reflect "^1.38.0"
     log4js "^6.3.0"
     typescript "~3.9.10"
     yargs "^16.2.0"
@@ -4198,16 +4198,16 @@ jsii-pacmak@^1.20.1:
     xmlbuilder "^15.1.1"
     yargs "^16.2.0"
 
-jsii-reflect@^1.30.0, jsii-reflect@^1.36.0, jsii-reflect@^1.37.0:
-  version "1.37.0"
-  resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.37.0.tgz#14f289318bb1350e812b8e97291dcefb3091c559"
-  integrity sha512-cVR9PQ2WyZZlrZ61ywvJuicg4sAuZQ0zkpB0UkQeTzoL0qens41/ejnJVwcWQ+FGQJEA8YZggWUJM3eSYGkMkg==
+jsii-reflect@^1.30.0, jsii-reflect@^1.37.0, jsii-reflect@^1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.38.0.tgz#4d9d52a148922dddd8d2647937747455f92e02bb"
+  integrity sha512-KH5Gi5gqcLVdPqCbC1fZf4hhOrGhNnYRjgAS5jyVpBfydsTaQFPqtu6Lyz/BntQ495u4rax1Teqk3ITafdFCoA==
   dependencies:
-    "@jsii/check-node" "1.37.0"
-    "@jsii/spec" "^1.37.0"
+    "@jsii/check-node" "1.38.0"
+    "@jsii/spec" "^1.38.0"
     colors "^1.4.0"
     fs-extra "^9.1.0"
-    oo-ascii-tree "^1.37.0"
+    oo-ascii-tree "^1.38.0"
     yargs "^16.2.0"
 
 jsii-rosetta@^1.37.0:
@@ -4899,10 +4899,10 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-oo-ascii-tree@^1.37.0:
-  version "1.37.0"
-  resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.37.0.tgz#b1f1bf26c7fe567ed258f8b73a1222ce47c13edd"
-  integrity sha512-ISfOm+gJB60iaDhxMhUwvAKAb7aCpvsZAbxMagQyhTvzPXH14tqBteFC79/CVSjNKthdZQ5a+D6UzABm06MM8Q==
+oo-ascii-tree@^1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.38.0.tgz#749c258bf2e3d74c5cc210c6bc98e05c567706b4"
+  integrity sha512-TyOg2fULmdzeVi/mbHwLHFdi/jcuhXN2HIhxPrSHqgL+Fu2WYtz9PIakFkeCuEdBWjUlYiJx89Xn0iOIhv17gA==
 
 optionator@^0.8.1:
   version "0.8.3"
