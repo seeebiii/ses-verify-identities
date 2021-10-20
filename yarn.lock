@@ -880,14 +880,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jsii/check-node@1.39.0":
-  version "1.39.0"
-  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.39.0.tgz#31a22f6270c790b5f2bb0f7d2950511e6d7c0c9e"
-  integrity sha512-tqx5o0Zw6WrVKmB9S1X0E8AajfXjWu9yoOUtUdYVCR6NAdi8mY/NQ3uYJ8II0AF1MtC0PdASOjb/6i3h02komw==
-  dependencies:
-    chalk "^4.1.2"
-    semver "^7.3.5"
-
 "@jsii/check-node@1.40.0":
   version "1.40.0"
   resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.40.0.tgz#49882a61ad1b3a37cd35c35fa1a2301955f1c058"
@@ -896,7 +888,7 @@
     chalk "^4.1.2"
     semver "^7.3.5"
 
-"@jsii/spec@^1.30.0", "@jsii/spec@^1.39.0", "@jsii/spec@^1.40.0":
+"@jsii/spec@^1.30.0", "@jsii/spec@^1.40.0":
   version "1.40.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.40.0.tgz#027dd2a9c2c0b49e5974ad6445728dde91569fe3"
   integrity sha512-SJ9Kwz0C53bomYWb5PlESt6v8JmfgqqFjc1annNK+foHxcaUzs3trhKbBXgxhcoApE2pMnUIBj3DG9gLNmKdWw==
@@ -4218,7 +4210,7 @@ jsii-pacmak@^1.20.1:
     xmlbuilder "^15.1.1"
     yargs "^16.2.0"
 
-jsii-reflect@^1.30.0, jsii-reflect@^1.39.0, jsii-reflect@^1.40.0:
+jsii-reflect@^1.30.0, jsii-reflect@^1.40.0:
   version "1.40.0"
   resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.40.0.tgz#f8715f1506059d49294b32fe2c710753dd9545ba"
   integrity sha512-/ccIjkRSfbHCl1MCfwWFaz2RjoAAiNH5teE95Qi11a4gbTu52WcOFIg3Y+8llzHmmLykr9jTDqBtgyzi9WI6dw==
@@ -4244,12 +4236,12 @@ jsii-rosetta@^1.40.0:
     yargs "^16.2.0"
 
 jsii@^1.20.1:
-  version "1.39.0"
-  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.39.0.tgz#68554dd5c20ac4b7da118f748d5297e5f9e58384"
-  integrity sha512-2ReD7t6rGhT+c41xovFoAMc4XU5/O2VqGRh3Ud/wN+Nn1ISjZFQa4doQ1xtZLFb1065Vxyv5VCqWp80t6Xw2iA==
+  version "1.40.0"
+  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.40.0.tgz#cc04f2bad5ae9495513af921cfcaca99dc8753d3"
+  integrity sha512-QUPmQzq7c/FREvtfw9+eIU16LB45hxRPtdLO2Ci2ZX1df4E4+vegtfvvjUJ21diVo2hwVp4UCftKqrXZ/cXEFg==
   dependencies:
-    "@jsii/check-node" "1.39.0"
-    "@jsii/spec" "^1.39.0"
+    "@jsii/check-node" "1.40.0"
+    "@jsii/spec" "^1.40.0"
     case "^1.6.3"
     colors "^1.4.0"
     deep-equal "^2.0.5"
