@@ -4244,12 +4244,12 @@ jsii-rosetta@^1.40.0:
     yargs "^16.2.0"
 
 jsii@^1.20.1:
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.40.0.tgz#cc04f2bad5ae9495513af921cfcaca99dc8753d3"
-  integrity sha512-QUPmQzq7c/FREvtfw9+eIU16LB45hxRPtdLO2Ci2ZX1df4E4+vegtfvvjUJ21diVo2hwVp4UCftKqrXZ/cXEFg==
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.41.0.tgz#926e033d7ba57c65d6d070dee1d4d19da0fa9508"
+  integrity sha512-5pjfWjSaMzE+mkpW//llBSGLcXJGNjE0KFSf73USPZTfJC09dBEJ4KJM85SogCNnWHwG5QecEpZStxNvt8GI7g==
   dependencies:
-    "@jsii/check-node" "1.40.0"
-    "@jsii/spec" "^1.40.0"
+    "@jsii/check-node" "1.41.0"
+    "@jsii/spec" "^1.41.0"
     case "^1.6.3"
     colors "^1.4.0"
     deep-equal "^2.0.5"
