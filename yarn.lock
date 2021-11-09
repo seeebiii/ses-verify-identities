@@ -4558,12 +4558,12 @@ jsii-rosetta@^1.43.0:
     yargs "^16.2.0"
 
 jsii@^1.20.1:
-  version "1.42.0"
-  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.42.0.tgz#2f8a534c9f981149f4455ec1272bfab7ba1fa6a3"
-  integrity sha512-Ctbaudn3t3wJ3ihsgCLuEjQGM5CfZl1PJDXfOlELUV6ELwTbvT3TCbyVdt/CCWTOObigQR8OftAB3jl7ymqd3w==
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/jsii/-/jsii-1.43.0.tgz#661f09aeb8b1ba12267268d2a62b8b162c5951c8"
+  integrity sha512-2GsSiwbX++/f6BE/fnT9s0iBQtT+MSsnFBZdpyw4sV50gEg9gbD1rPO/ewSLuUh83mrztPtdiurxsBpYGj17Nw==
   dependencies:
-    "@jsii/check-node" "1.42.0"
-    "@jsii/spec" "^1.42.0"
+    "@jsii/check-node" "1.43.0"
+    "@jsii/spec" "^1.43.0"
     case "^1.6.3"
     colors "^1.4.0"
     deep-equal "^2.0.5"
