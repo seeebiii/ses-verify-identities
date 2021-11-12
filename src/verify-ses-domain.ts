@@ -115,6 +115,7 @@ export class VerifySesDomain extends Construct {
   getHostedZone(domainName: string): IHostedZone {
     return HostedZone.fromLookup(this, 'Zone', {
       domainName: domainName,
+      privateZone: false,
     });
   }
 
