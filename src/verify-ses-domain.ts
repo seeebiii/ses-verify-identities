@@ -7,6 +7,9 @@ import { generateSesPolicyForCustomResource } from './helper';
 
 export type NotificationType = 'Bounce' | 'Complaint' | 'Delivery';
 
+/**
+ * @struct
+ */
 export interface IVerifySesDomainProps {
   /**
    * A domain name to be used for the SES domain identity, e.g. 'sub-domain.example.org'

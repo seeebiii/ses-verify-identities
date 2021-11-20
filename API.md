@@ -8,7 +8,7 @@ Name|Description
 [VerifySesEmailAddress](#seeebiii-ses-verify-identities-verifysesemailaddress)|A construct to verify an SES email address identity.
 
 
-**Interfaces**
+**Structs**
 
 Name|Description
 ----|-----------
@@ -38,6 +38,13 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
 * **parent** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 * **props** (<code>[IVerifySesDomainProps](#seeebiii-ses-verify-identities-iverifysesdomainprops)</code>)  *No description*
+  * **domainName** (<code>string</code>)  A domain name to be used for the SES domain identity, e.g. 'sub-domain.example.org'. 
+  * **addDkimRecords** (<code>boolean</code>)  Whether to automatically add DKIM records to the hosted zone of your domain. __*Default*__: true
+  * **addMxRecord** (<code>boolean</code>)  Whether to automatically add a MX record to the hosted zone of your domain. __*Default*__: true
+  * **addTxtRecord** (<code>boolean</code>)  Whether to automatically add a TXT record to the hosed zone of your domain. __*Default*__: true
+  * **hostedZoneName** (<code>string</code>)  A hostedZone name to be matched with Route 53 record. __*Default*__: same as domainName
+  * **notificationTopic** (<code>[Topic](#aws-cdk-aws-sns-topic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
+  * **notificationTypes** (<code>Array<string></code>)  Select for which notification types you want to configure a topic. __*Default*__: [Bounce, Complaint]
 
 
 ### Methods
@@ -79,16 +86,17 @@ new VerifySesEmailAddress(parent: Construct, name: string, props: IVerifySesEmai
 * **parent** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 * **props** (<code>[IVerifySesEmailAddressProps](#seeebiii-ses-verify-identities-iverifysesemailaddressprops)</code>)  *No description*
+  * **emailAddress** (<code>string</code>)  The email address to be verified, e.g. 'hello@example.org'. 
+  * **region** (<code>string</code>)  An optional AWS region to validate the email address. __*Default*__: The custom resource will be created in the stack region
 
 
 
 
-## interface IVerifySesDomainProps  <a id="seeebiii-ses-verify-identities-iverifysesdomainprops"></a>
+## struct IVerifySesDomainProps  <a id="seeebiii-ses-verify-identities-iverifysesdomainprops"></a>
 
 
 
 
-### Properties
 
 
 Name | Type | Description 
@@ -103,12 +111,11 @@ Name | Type | Description
 
 
 
-## interface IVerifySesEmailAddressProps  <a id="seeebiii-ses-verify-identities-iverifysesemailaddressprops"></a>
+## struct IVerifySesEmailAddressProps  <a id="seeebiii-ses-verify-identities-iverifysesemailaddressprops"></a>
 
 
 
 
-### Properties
 
 
 Name | Type | Description 

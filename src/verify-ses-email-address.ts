@@ -2,6 +2,9 @@ import { Construct } from '@aws-cdk/core';
 import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
 import { generateSesPolicyForCustomResource } from './helper';
 
+/**
+ * @struct
+ */
 export interface IVerifySesEmailAddressProps {
   /**
    * The email address to be verified, e.g. 'hello@example.org'.
