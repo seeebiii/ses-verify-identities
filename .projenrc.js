@@ -1,5 +1,6 @@
 const { ProjectType } = require('projen');
 const { AwsCdkConstructLibrary } = require('projen');
+const { JobPermission } = require('projen/lib/github/workflows-model');
 
 const project = new AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
@@ -67,7 +68,6 @@ const project = new AwsCdkConstructLibrary({
     },
   },
   npmignore: ['.github'],
-  releaseBranches: ['main'],
   releaseEveryCommit: true,
   releaseToNpm: true,
   releaseWorkflow: true,
@@ -90,6 +90,11 @@ autoMerge.on({
 autoMerge.addJobs({
   automerge: {
     'runs-on': 'ubuntu-latest',
+    'permissions': {
+      pullRequests: JobPermission.WRITE,
+      checks: JobPermission.WRITE,
+      contents: JobPermission.WRITE,
+    },
     'steps':
         [
           {

@@ -5,23 +5,31 @@
     "url": "https://github.com/seeebiii/ses-verify-identities"
   },
   "scripts": {
-    "clobber": "npx projen clobber",
-    "compile": "npx projen compile",
-    "test:compile": "npx projen test:compile",
-    "test": "npx projen test",
     "build": "npx projen build",
     "bump": "npx projen bump",
-    "release": "npx projen release",
-    "test:watch": "npx projen test:watch",
-    "test:update": "npx projen test:update",
-    "projen:upgrade": "npx projen projen:upgrade",
-    "watch": "npx projen watch",
-    "package": "npx projen package",
-    "eslint": "npx projen eslint",
+    "clobber": "npx projen clobber",
     "compat": "npx projen compat",
+    "compile": "npx projen compile",
+    "default": "npx projen default",
     "docgen": "npx projen docgen",
-    "projen": "npx projen",
-    "start": "npx projen start"
+    "eslint": "npx projen eslint",
+    "package": "npx projen package",
+    "post-compile": "npx projen post-compile",
+    "pre-compile": "npx projen pre-compile",
+    "publish:github": "npx projen publish:github",
+    "publish:maven": "npx projen publish:maven",
+    "publish:npm": "npx projen publish:npm",
+    "publish:nuget": "npx projen publish:nuget",
+    "publish:pypi": "npx projen publish:pypi",
+    "release": "npx projen release",
+    "test": "npx projen test",
+    "test:update": "npx projen test:update",
+    "test:watch": "npx projen test:watch",
+    "unbump": "npx projen unbump",
+    "upgrade": "npx projen upgrade",
+    "upgrade-projen": "npx projen upgrade-projen",
+    "watch": "npx projen watch",
+    "projen": "npx projen"
   },
   "author": {
     "name": "Sebastian Hesse",
@@ -31,7 +39,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.96.0",
     "@types/jest": "^26.0.20",
-    "@types/node": "^10.17.0",
+    "@types/node": "^14.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.19.0",
@@ -45,7 +53,8 @@
     "jsii-docgen": "^1.8.36",
     "jsii-pacmak": "^1.20.1",
     "json-schema": "^0.3.0",
-    "projen": "^0.17.20",
+    "npm-check-updates": "^11",
+    "projen": "^0.34.12",
     "standard-version": "^9",
     "ts-jest": "^26.5.0",
     "typescript": "^3.9.5"
@@ -81,8 +90,8 @@
   ],
   "main": "lib/index.js",
   "license": "MIT",
-  "version": "3.2.0",
   "homepage": "https://github.com/seeebiii/ses-verify-identities",
+  "version": "0.0.0",
   "jest": {
     "rootDir": ".",
     "roots": [
@@ -122,7 +131,7 @@
     "preset": "ts-jest",
     "globals": {
       "ts-jest": {
-        "tsconfig": "tsconfig.jest.json"
+        "tsconfig": "tsconfig.dev.json"
       }
     }
   },
