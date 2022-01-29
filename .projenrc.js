@@ -71,6 +71,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   dependabotOptions: {
     autoMerge: true,
   },
+
+  githubOptions: {
+    mergify: false,
+  },
 });
 
 const autoMerge = project.github.addWorkflow('AutoMerge');
