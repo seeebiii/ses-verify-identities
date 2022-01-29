@@ -12,6 +12,7 @@ on:
       - completed
 jobs:
   automerge:
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       checks: write

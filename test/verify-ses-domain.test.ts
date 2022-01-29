@@ -1,16 +1,7 @@
-import {
-  anything,
-  Capture,
-  countResources,
-  countResourcesLike,
-  deepObjectLike,
-  encodedJson,
-  expect as expectCDK,
-  haveResourceLike,
-  stringLike,
-} from '@aws-cdk/assert';
-import { Topic } from '@aws-cdk/aws-sns';
-import * as cdk from '@aws-cdk/core';
+
+import * as cdk from 'aws-cdk-lib';
+import { Capture, Match, Template } from 'aws-cdk-lib/assertions';
+import { Topic } from 'aws-cdk-lib/aws-sns';
 import { VerifySesDomain } from '../src';
 
 const domain = 'sub-domain.example.org';
@@ -35,27 +26,28 @@ describe('SES domain verification', () => {
       addDkimRecords: false,
     });
 
-    expectCDK(stack).to(countResources('Custom::AWS', 3));
-    expectCDK(stack).to(
-      haveResourceLike('Custom::AWS', {
-        Create: encodedJson(deepObjectLike({
-          service: 'SES',
-          action: 'verifyDomainIdentity',
-          parameters: {
-            Domain: domain,
-          },
-        })),
-        Delete: encodedJson(deepObjectLike({
-          service: 'SES',
-          action: 'deleteIdentity',
-          parameters: {
-            Identity: domain,
-          },
-        })),
-      }),
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 3);
+    template.hasResourceProperties('Custom::AWS', {
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'verifyDomainIdentity',
+        parameters: {
+          Domain: domain,
+        },
+      })),
+      Delete: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'deleteIdentity',
+        parameters: {
+          Identity: domain,
+        },
+      })),
+    },
     );
-    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
-    expectCDK(stack).to(countResources('AWS::Route53::RecordSet', 0));
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.resourceCountIs('AWS::Route53::RecordSet', 0);
   });
 
   it('ensure txt record is added', () => {
@@ -69,14 +61,15 @@ describe('SES domain verification', () => {
       addDkimRecords: false,
     });
 
-    expectCDK(stack).to(countResources('Custom::AWS', 3));
-    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
-    expectCDK(stack).to(countResources('AWS::Route53::RecordSet', 1));
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Type: 'TXT',
-        Name: '_amazonses.' + zoneName,
-      }),
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 3);
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.resourceCountIs('AWS::Route53::RecordSet', 1);
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'TXT',
+      Name: '_amazonses.' + zoneName,
+    },
     );
   });
 
@@ -91,14 +84,15 @@ describe('SES domain verification', () => {
       addDkimRecords: false,
     });
 
-    expectCDK(stack).to(countResources('Custom::AWS', 3));
-    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
-    expectCDK(stack).to(countResources('AWS::Route53::RecordSet', 1));
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Type: 'MX',
-        Name: zoneName,
-      }),
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 3);
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.resourceCountIs('AWS::Route53::RecordSet', 1);
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'MX',
+      Name: zoneName,
+    },
     );
   });
 
@@ -113,21 +107,22 @@ describe('SES domain verification', () => {
       addDkimRecords: true,
     });
 
-    expectCDK(stack).to(countResources('Custom::AWS', 4));
-    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
-    expectCDK(stack).to(countResources('AWS::Route53::RecordSet', 3));
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 4);
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.resourceCountIs('AWS::Route53::RecordSet', 3);
 
-    const c = Capture.anyType();
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Type: 'CNAME',
-        Name: {
-          'Fn::Join': ['', c.capture()],
-        },
-      }),
+    const c = new Capture();
+    template.hasResourceProperties('AWS::Route53::RecordSet', {
+      Type: 'CNAME',
+      Name: {
+        'Fn::Join': ['', c],
+      },
+    },
     );
 
-    expect(c.capturedValue).toContain('._domainkey.' + zoneName);
+    expect(c.asArray()[1]).toContain('._domainkey.' + zoneName);
   });
 
   it('ensure custom topic is used', () => {
@@ -146,11 +141,13 @@ describe('SES domain verification', () => {
       addDkimRecords: true,
     });
 
-    expectCDK(stack).to(countResources('Custom::AWS', 4));
-    expectCDK(stack).to(countResources('AWS::SNS::Topic', 1));
-    expectCDK(stack).to(haveResourceLike('AWS::SNS::Topic', {
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 4);
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.hasResourceProperties('AWS::SNS::Topic', {
       TopicName: 'existing-topic-name',
-    }));
+    });
   });
 
   it('ensure custom notification types are used', () => {
@@ -165,30 +162,47 @@ describe('SES domain verification', () => {
       addDkimRecords: true,
     });
 
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 3);
+
     // since we only want to have a notification topic for Bounce, we only expect one custom resource to set a notification topic
-    expectCDK(stack).to(countResourcesLike('Custom::AWS', 1, {
-      ServiceToken: anything(),
-      Create: deepObjectLike({
-        'Fn::Join': [
-          '', [stringLike(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\"*`), anything(), anything()],
-        ],
+    const c = new Capture();
+    template.hasResourceProperties('Custom::AWS', {
+      ServiceToken: Match.anyValue(),
+      Create: Match.objectLike({
+        'Fn::Join': Match.arrayWith([
+          '',
+          [
+            c,
+            Match.anyValue(),
+            Match.anyValue(),
+          ],
+        ]),
       }),
       InstallLatestAwsSdk: true,
-    }));
+    });
+
+    expect(c.asString()).toMatch(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\"`);
 
     // now check that the custom resource is configured for 'Bounce'
-    expectCDK(stack).to(haveResourceLike('Custom::AWS', {
-      ServiceToken: anything(),
-      Create: deepObjectLike({
-        'Fn::Join': [
-          '', [
-            stringLike(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\",\"NotificationType\":\"Bounce\"*`),
-            anything(),
-            anything(),
-          ],
-        ],
-      }),
-      InstallLatestAwsSdk: true,
-    }));
+    expect(c.asString()).toMatch(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\",\"NotificationType\":\"Bounce\"`);
+  });
+
+  it('ensure matches snapshot', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      notificationTypes: ['Bounce'],
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: true,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    expect(template.toJSON()).toMatchSnapshot();
   });
 });

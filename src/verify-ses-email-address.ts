@@ -1,5 +1,5 @@
-import { Construct } from '@aws-cdk/core';
-import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
+import { AwsCustomResource, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
+import { Construct } from 'constructs';
 import { generateSesPolicyForCustomResource } from './helper';
 
 /**
