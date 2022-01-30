@@ -1,5 +1,5 @@
-import { Effect, PolicyStatement } from '@aws-cdk/aws-iam';
-import { AwsCustomResourcePolicy } from '@aws-cdk/custom-resources';
+import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { AwsCustomResourcePolicy } from 'aws-cdk-lib/custom-resources';
 
 export function generateSesPolicyForCustomResource(...methods: string[]): AwsCustomResourcePolicy {
   // for some reason the default policy is generated as `email:<method>` which does not work -> hence we need to provide our own

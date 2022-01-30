@@ -1,22 +1,17 @@
 const { ProjectType } = require('projen');
-const { AwsCdkConstructLibrary } = require('projen');
+const { awscdk } = require('projen');
 const { JobPermission } = require('projen/lib/github/workflows-model');
 
-const project = new AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
   authorAddress: 'info@sebastianhesse.de',
-  cdkVersion: '1.133.0',
+  cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'ses-verify-identities',
   repositoryUrl: 'git@github.com:seeebiii/ses-verify-identities.git',
 
   /* AwsCdkConstructLibraryOptions */
-  cdkAssert: true,
-  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/custom-resources',
-    '@aws-cdk/aws-sns', '@aws-cdk/aws-route53', '@aws-cdk/aws-iam',
-    '@aws-cdk/cx-api'],
-  cdkTestDependencies: ['@aws-cdk/assert'],
   cdkVersionPinning: false,
 
   /* ConstructLibraryOptions */
@@ -76,26 +71,30 @@ const project = new AwsCdkConstructLibrary({
   dependabotOptions: {
     autoMerge: true,
   },
+
+  githubOptions: {
+    mergify: false,
+  },
 });
 
 const autoMerge = project.github.addWorkflow('AutoMerge');
 autoMerge.on({
-  pull_request: {
+  pullRequest: {
     types: ['labeled', 'opened', 'reopened'],
   },
-  check_suite: {
+  checkSuite: {
     types: ['completed'],
   },
 });
 autoMerge.addJobs({
   automerge: {
-    'runs-on': 'ubuntu-latest',
-    'permissions': {
+    runsOn: 'ubuntu-latest',
+    permissions: {
       pullRequests: JobPermission.WRITE,
       checks: JobPermission.WRITE,
       contents: JobPermission.WRITE,
     },
-    'steps':
+    steps:
         [
           {
             uses: 'actions/checkout@v2',

@@ -1,5 +1,6 @@
-import { countResources, encodedJson, expect as expectCDK, haveResourceLike, objectLike } from '@aws-cdk/assert';
-import * as cdk from '@aws-cdk/core';
+
+import * as cdk from 'aws-cdk-lib';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import { VerifySesEmailAddress } from '../src';
 
 test('ensure custom resource exists to verify email address', () => {
@@ -11,32 +12,32 @@ test('ensure custom resource exists to verify email address', () => {
     emailAddress: emailAddress,
   });
 
-  expectCDK(stack).to(countResources('Custom::AWS', 1));
+  // Then
+  const template = Template.fromStack(stack);
+  template.resourceCountIs('Custom::AWS', 1);
 
   // ensure create properties are as expected
-  expectCDK(stack).to(
-    haveResourceLike('Custom::AWS', {
-      Create: encodedJson(objectLike({
-        service: 'SES',
-        action: 'verifyEmailIdentity',
-        parameters: {
-          EmailAddress: emailAddress,
-        },
-      })),
-    }),
+  template.hasResourceProperties('Custom::AWS', {
+    Create: Match.serializedJson(Match.objectLike({
+      service: 'SES',
+      action: 'verifyEmailIdentity',
+      parameters: {
+        EmailAddress: emailAddress,
+      },
+    })),
+  },
   );
 
   // ensure delete properties are as expected
-  expectCDK(stack).to(
-    haveResourceLike('Custom::AWS', {
-      Delete: encodedJson(objectLike({
-        service: 'SES',
-        action: 'deleteIdentity',
-        parameters: {
-          Identity: emailAddress,
-        },
-      })),
+  template.hasResourceProperties('Custom::AWS', {
+    Delete: Match.serializedJson({
+      service: 'SES',
+      action: 'deleteIdentity',
+      parameters: {
+        Identity: emailAddress,
+      },
     }),
+  },
   );
 });
 
@@ -51,33 +52,33 @@ test('ensure custom resource exists in a custom region to verify email address',
     region,
   });
 
-  expectCDK(stack).to(countResources('Custom::AWS', 1));
+  // Then
+  const template = Template.fromStack(stack);
+  template.resourceCountIs('Custom::AWS', 1);
 
   // ensure create properties are as expected
-  expectCDK(stack).to(
-    haveResourceLike('Custom::AWS', {
-      Create: encodedJson(objectLike({
-        service: 'SES',
-        action: 'verifyEmailIdentity',
-        parameters: {
-          EmailAddress: emailAddress,
-        },
-        region,
-      })),
-    }),
+  template.hasResourceProperties('Custom::AWS', {
+    Create: Match.serializedJson(Match.objectLike({
+      service: 'SES',
+      action: 'verifyEmailIdentity',
+      parameters: {
+        EmailAddress: emailAddress,
+      },
+      region,
+    })),
+  },
   );
 
   // ensure delete properties are as expected
-  expectCDK(stack).to(
-    haveResourceLike('Custom::AWS', {
-      Delete: encodedJson(objectLike({
-        service: 'SES',
-        action: 'deleteIdentity',
-        parameters: {
-          Identity: emailAddress,
-        },
-        region,
-      })),
+  template.hasResourceProperties('Custom::AWS', {
+    Delete: Match.serializedJson({
+      service: 'SES',
+      action: 'deleteIdentity',
+      parameters: {
+        Identity: emailAddress,
+      },
+      region,
     }),
+  },
   );
 });

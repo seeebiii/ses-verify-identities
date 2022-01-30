@@ -1,8 +1,9 @@
-import { CnameRecord, HostedZone, IHostedZone, MxRecord, TxtRecord } from '@aws-cdk/aws-route53';
-import { Topic } from '@aws-cdk/aws-sns';
-import { CfnOutput, Construct, Fn } from '@aws-cdk/core';
-import { AwsCustomResource, PhysicalResourceId } from '@aws-cdk/custom-resources';
-import { EnvironmentPlaceholders } from '@aws-cdk/cx-api';
+import { CfnOutput, Fn } from 'aws-cdk-lib';
+import { CnameRecord, HostedZone, IHostedZone, MxRecord, TxtRecord } from 'aws-cdk-lib/aws-route53';
+import { Topic } from 'aws-cdk-lib/aws-sns';
+import { AwsCustomResource, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
+import { EnvironmentPlaceholders } from 'aws-cdk-lib/cx-api';
+import { Construct } from 'constructs';
 import { generateSesPolicyForCustomResource } from './helper';
 
 export type NotificationType = 'Bounce' | 'Complaint' | 'Delivery';
