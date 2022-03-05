@@ -72,6 +72,51 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
+    "VerifyExampleDomainAddBounceTopicHeaderssubdomainexampleorg863B3F6D": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "VerifyExampleDomainAddBounceTopicsubdomainexampleorgCustomResourcePolicy11D5C18D",
+        "VerifyExampleDomainAddBounceTopicsubdomainexampleorgD92CBEF0",
+        "VerifyExampleDomainAddBounceTopicHeaderssubdomainexampleorgCustomResourcePolicyEFD7055E",
+      ],
+      "Properties": Object {
+        "Create": "{\\"service\\":\\"SES\\",\\"action\\":\\"setIdentityHeadersInNotificationsEnabled\\",\\"parameters\\":{\\"Enabled\\":true,\\"Identity\\":\\"sub-domain.example.org\\",\\"NotificationType\\":\\"Bounce\\"},\\"physicalResourceId\\":{\\"id\\":\\"sub-domain.example.org-set-Bounce-topic-headers\\"}}",
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWS",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "VerifyExampleDomainAddBounceTopicHeaderssubdomainexampleorgCustomResourcePolicyEFD7055E": Object {
+      "DependsOn": Array [
+        "VerifyExampleDomainAddBounceTopicsubdomainexampleorgCustomResourcePolicy11D5C18D",
+        "VerifyExampleDomainAddBounceTopicsubdomainexampleorgD92CBEF0",
+      ],
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "ses:SetIdentityHeadersInNotificationsEnabled",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "VerifyExampleDomainAddBounceTopicHeaderssubdomainexampleorgCustomResourcePolicyEFD7055E",
+        "Roles": Array [
+          Object {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "VerifyExampleDomainAddBounceTopicsubdomainexampleorgCustomResourcePolicy11D5C18D": Object {
       "DependsOn": Array [
         "VerifyExampleDomainSesNotificationTopicC05E5B2B",

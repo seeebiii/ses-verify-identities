@@ -60,6 +60,7 @@ new VerifySesDomain(this, 'SesDomainVerification', {
  * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `notificationTopic` An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
  * `notificationTypes` Select for which notification types you want to configure a topic. Default: `[Bounce, Complaint]`.
+ * `includeOriginalHeaders` Whether to include the original email headers in the notifications. Default: `false`.
 
 ### Verify an Email Address
 

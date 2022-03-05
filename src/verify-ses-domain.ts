@@ -46,6 +46,11 @@ export interface IVerifySesDomainProps {
    * @default [Bounce, Complaint]
    */
   readonly notificationTypes?: NotificationType[];
+  /**
+   * Whether to include the original email headers in the notifications.
+   * @default false
+   */
+  readonly includeOriginalHeaders?: boolean;
 }
 
 /**
@@ -65,7 +70,7 @@ export class VerifySesDomain extends Construct {
     const domainName = props.domainName;
     const verifyDomainIdentity = this.verifyDomainIdentity(domainName);
     const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, props.notificationTopic);
-    this.addTopicToDomainIdentity(domainName, topic, props.notificationTypes);
+    this.addTopicToDomainIdentity(domainName, topic, props.notificationTypes, props.includeOriginalHeaders);
 
     const hostedZoneName = props.hostedZoneName ? props.hostedZoneName : domainName;
     const zone = this.getHostedZone(hostedZoneName);
@@ -187,15 +192,15 @@ export class VerifySesDomain extends Construct {
     return topic;
   }
 
-  private addTopicToDomainIdentity(domainName: string, topic: Topic, notificationTypes?: NotificationType[]) {
+  private addTopicToDomainIdentity(domainName: string, topic: Topic, notificationTypes?: NotificationType[], includeOriginalHeaders?: boolean) {
     if (notificationTypes?.length) {
       notificationTypes.forEach((type) => {
-        this.addSesNotificationTopicForIdentity(domainName, type, topic);
+        this.addSesNotificationTopicForIdentity(domainName, type, topic, includeOriginalHeaders);
       });
     } else {
       // by default, notify on errors like a bounce or complaint
-      this.addSesNotificationTopicForIdentity(domainName, 'Bounce', topic);
-      this.addSesNotificationTopicForIdentity(domainName, 'Complaint', topic);
+      this.addSesNotificationTopicForIdentity(domainName, 'Bounce', topic, includeOriginalHeaders);
+      this.addSesNotificationTopicForIdentity(domainName, 'Complaint', topic, includeOriginalHeaders);
     }
   }
 
@@ -203,6 +208,7 @@ export class VerifySesDomain extends Construct {
     identity: string,
     notificationType: NotificationType,
     notificationTopic: Topic,
+    includeOriginalHeaders?: boolean,
   ): void {
     const addTopic = new AwsCustomResource(this, `Add${notificationType}Topic-${identity}`, {
       onCreate: {
@@ -219,6 +225,24 @@ export class VerifySesDomain extends Construct {
     });
 
     addTopic.node.addDependency(notificationTopic);
+
+    if (includeOriginalHeaders === true) {
+      const addTopicHeaders = new AwsCustomResource(this, `Add${notificationType}TopicHeaders-${identity}`, {
+        onCreate: {
+          service: 'SES',
+          action: 'setIdentityHeadersInNotificationsEnabled',
+          parameters: {
+            Enabled: true,
+            Identity: identity,
+            NotificationType: notificationType,
+          },
+          physicalResourceId: PhysicalResourceId.of(`${identity}-set-${notificationType}-topic-headers`),
+        },
+        policy: generateSesPolicyForCustomResource('SetIdentityHeadersInNotificationsEnabled'),
+      });
+
+      addTopicHeaders.node.addDependency(addTopic);
+    }
   }
 }
 

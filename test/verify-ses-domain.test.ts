@@ -183,10 +183,41 @@ describe('SES domain verification', () => {
       InstallLatestAwsSdk: true,
     });
 
-    expect(c.asString()).toMatch(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\"`);
-
     // now check that the custom resource is configured for 'Bounce'
     expect(c.asString()).toMatch(`{\"service\":\"SES\",\"action\":\"setIdentityNotificationTopic\",\"parameters\":{\"Identity\":\"${domain}\",\"NotificationType\":\"Bounce\"`);
+  });
+
+  it('ensure include headers enabled', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      notificationTypes: ['Bounce'],
+      includeOriginalHeaders: true,
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: true,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 4);
+
+    // headers are enabled for Bounce topic
+    template.hasResourceProperties('Custom::AWS', {
+      ServiceToken: Match.anyValue(),
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'setIdentityHeadersInNotificationsEnabled',
+        parameters: {
+          Enabled: true,
+          Identity: domain,
+          NotificationType: 'Bounce',
+        },
+      })),
+      InstallLatestAwsSdk: true,
+    });
   });
 
   it('ensure matches snapshot', () => {
@@ -196,6 +227,7 @@ describe('SES domain verification', () => {
     new VerifySesDomain(stack, 'VerifyExampleDomain', {
       domainName: domain,
       notificationTypes: ['Bounce'],
+      includeOriginalHeaders: true,
       addTxtRecord: false,
       addMxRecord: false,
       addDkimRecords: true,
