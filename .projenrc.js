@@ -38,7 +38,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   /* NodePackageOptions */
   entrypoint: 'lib/index.js',
   homepage: 'https://github.com/seeebiii/ses-verify-identities',
-  keywords: ['aws',
+  keywords: [
+    'aws',
     'aws-cdk',
     'aws-ses',
     'cdk-construct',
@@ -46,7 +47,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'email',
     'domain',
     'SES identities',
-    'SES verification'],
+    'SES verification',
+  ],
   license: 'MIT',
   licensed: true,
   packageName: '@seeebiii/ses-verify-identities',
@@ -94,23 +96,22 @@ autoMerge.addJobs({
       checks: JobPermission.WRITE,
       contents: JobPermission.WRITE,
     },
-    steps:
-        [
-          {
-            uses: 'actions/checkout@v2',
-          },
-          {
-            name: 'automerge',
-            uses: 'pascalgn/automerge-action@v0.13.1',
-            env: {
-              GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
-              MERGE_LABELS: 'dependencies,!wip,!work in progress',
-              MERGE_FILTER_AUTHOR: 'dependabot[bot]',
-              MERGE_DELETE_BRANCH: 'true',
-              MERGE_RETRY_SLEEP: '60000',
-            },
-          },
-        ],
+    steps: [
+      {
+        uses: 'actions/checkout@v2',
+      },
+      {
+        name: 'automerge',
+        uses: 'pascalgn/automerge-action@v0.13.1',
+        env: {
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+          MERGE_LABELS: 'dependencies,!wip,!work in progress',
+          MERGE_FILTER_AUTHOR: 'dependabot[bot]',
+          MERGE_DELETE_BRANCH: 'true',
+          MERGE_RETRY_SLEEP: '60000',
+        },
+      },
+    ],
   },
 });
 
