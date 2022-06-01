@@ -54,11 +54,11 @@ new VerifySesDomain(this, 'SesDomainVerification', {
 #### Options
 
  * `domainName` A domain name to be used for the SES domain identity, e.g. 'example.org'
- * `hostedZoneName` A hostedZone name to be matched with Route 53 record. e.g. 'example.org'. Default: same as domainName.
+ * `hostedZoneName` A hosted zone name to be matched with a Route 53 record, e.g. 'example.org'. Default: use value of `domainName`.
  * `addTxtRecord` Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addMxRecord` Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
- * `notificationTopic` An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
+ * `notificationTopic` An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for provided notification types.
  * `notificationTypes` Select for which notification types you want to configure a topic. Default: `[Bounce, Complaint]`.
 
 ### Verify an Email Address
@@ -95,7 +95,7 @@ These commands should help you while developing:
 
 MIT License
 
-Copyright (c) 2020 [Sebastian Hesse](https://www.sebastianhesse.de)
+Copyright (c) 2022 [Sebastian Hesse](https://www.sebastianhesse.de)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
