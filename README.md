@@ -20,7 +20,7 @@ See more details on npmjs.com: https://www.npmjs.com/package/@seeebiii/ses-verif
 <dependency>
   <groupId>de.sebastianhesse.cdk-constructs</groupId>
   <artifactId>ses-verify-identities</artifactId>
-  <version>3.0.3</version>
+  <version>4.0.2</version>
 </dependency>
 ```
 
