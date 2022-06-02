@@ -54,7 +54,7 @@ new VerifySesDomain(this, 'SesDomainVerification', {
 #### Options
 
  * `domainName` A domain name to be used for the SES domain identity, e.g. 'example.org'
- * `hostedZoneName` A hosted zone name to be matched with a Route 53 record, e.g. 'example.org'. Default: use value of `domainName`.
+ * `hostedZoneName` A hosted zone name to be matched with a Route 53 record, e.g. 'example.org'. Default: same as `domainName`.
  * `addTxtRecord` Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addMxRecord` Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
@@ -81,11 +81,11 @@ Just open an issue or pull request :)
 
 These commands should help you while developing:
 
- * `npx projen`         synthesize changes in [.projenrc.js](.projenrc.js) to the project
- * `npm run build`      compile typescript to js
- * `npm run watch`      watch for changes and compile
- * `npm run test`       perform the jest unit tests
- * `npm run lint`       validate code against best practices
+ * `npx projen`      init [projen](https://github.com/projen/projen) and synthesize changes in [.projenrc.js](.projenrc.js) to the project
+ * `yarn build`      compile typescript to js
+ * `yarn watch`      watch for changes and compile
+ * `yarn test`       perform the jest unit tests
+ * `yarn eslint`     validate code against best practices
 
 ## Author
 
