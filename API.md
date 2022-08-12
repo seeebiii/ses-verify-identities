@@ -43,7 +43,7 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
   * **addMxRecord** (<code>boolean</code>)  Whether to automatically add a MX record to the hosted zone of your domain. __*Default*__: true
   * **addTxtRecord** (<code>boolean</code>)  Whether to automatically add a TXT record to the hosed zone of your domain. __*Default*__: true
   * **hostedZoneName** (<code>string</code>)  A hostedZone name to be matched with Route 53 record. __*Default*__: same as domainName
-  * **notificationTopic** (<code>[aws_sns.Topic](#aws-cdk-lib-aws-sns-topic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
+  * **notificationTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
   * **notificationTypes** (<code>Array<string></code>)  Select for which notification types you want to configure a topic. __*Default*__: [Bounce, Complaint]
 
 
@@ -106,7 +106,7 @@ Name | Type | Description
 **addMxRecord**? | <code>boolean</code> | Whether to automatically add a MX record to the hosted zone of your domain.<br/>__*Default*__: true
 **addTxtRecord**? | <code>boolean</code> | Whether to automatically add a TXT record to the hosed zone of your domain.<br/>__*Default*__: true
 **hostedZoneName**? | <code>string</code> | A hostedZone name to be matched with Route 53 record.<br/>__*Default*__: same as domainName
-**notificationTopic**? | <code>[aws_sns.Topic](#aws-cdk-lib-aws-sns-topic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
+**notificationTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
 
 
