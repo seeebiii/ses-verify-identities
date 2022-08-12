@@ -44,8 +44,8 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
   * **addDkimRecords** (<code>boolean</code>)  Whether to automatically add DKIM records to the hosted zone of your domain. __*Default*__: true
   * **addMxRecord** (<code>boolean</code>)  Whether to automatically add a MX record to the hosted zone of your domain. __*Default*__: true
   * **addTxtRecord** (<code>boolean</code>)  Whether to automatically add a TXT record to the hosed zone of your domain. __*Default*__: true
-  * **hostedZoneId** (<code>string</code>)  A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records. __*Optional*__
-  * **hostedZoneName** (<code>string</code>)  A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. Only use this if you don't provide a hostedZoneId. __*Default*__: same as domainName
+  * **hostedZoneId** (<code>string</code>)  Optional: A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records. __*Optional*__
+  * **hostedZoneName** (<code>string</code>)  A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. If you also provide hostedZoneId, it is assumed that these values are correct and no lookup happens. __*Default*__: same as domainName
   * **notificationTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
   * **notificationTypes** (<code>Array<string></code>)  Select for which notification types you want to configure a topic. __*Default*__: [Bounce, Complaint]
 
@@ -92,8 +92,8 @@ Name | Type | Description
 **addDkimRecords**? | <code>boolean</code> | Whether to automatically add DKIM records to the hosted zone of your domain.<br/>__*Default*__: true
 **addMxRecord**? | <code>boolean</code> | Whether to automatically add a MX record to the hosted zone of your domain.<br/>__*Default*__: true
 **addTxtRecord**? | <code>boolean</code> | Whether to automatically add a TXT record to the hosed zone of your domain.<br/>__*Default*__: true
-**hostedZoneId**? | <code>string</code> | A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records.<br/>__*Optional*__
-**hostedZoneName**? | <code>string</code> | A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. Only use this if you don't provide a hostedZoneId.<br/>__*Default*__: same as domainName
+**hostedZoneId**? | <code>string</code> | Optional: A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records.<br/>__*Optional*__
+**hostedZoneName**? | <code>string</code> | A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. If you also provide hostedZoneId, it is assumed that these values are correct and no lookup happens.<br/>__*Default*__: same as domainName
 **notificationTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
 
