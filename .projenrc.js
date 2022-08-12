@@ -5,7 +5,7 @@ const { JobPermission } = require('projen/lib/github/workflows-model');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Sebastian Hesse',
   authorAddress: 'info@sebastianhesse.de',
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.22.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'ses-verify-identities',
