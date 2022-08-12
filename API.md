@@ -21,7 +21,9 @@ Name|Description
 
 A construct to verify a SES domain identity.
 
-It initiates a domain verification and can automatically create appropriate records in Route53 to verify the domain. Also, it's possible to attach a notification topic for bounces, complaints or delivery notifications.
+It initiates a domain verification and can automatically create
+appropriate records in Route53 to verify the domain. Also, it's possible to attach a notification topic for bounces,
+complaints or delivery notifications.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
 __Extends__: [Construct](#constructs-construct)
@@ -42,26 +44,11 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
   * **addDkimRecords** (<code>boolean</code>)  Whether to automatically add DKIM records to the hosted zone of your domain. __*Default*__: true
   * **addMxRecord** (<code>boolean</code>)  Whether to automatically add a MX record to the hosted zone of your domain. __*Default*__: true
   * **addTxtRecord** (<code>boolean</code>)  Whether to automatically add a TXT record to the hosed zone of your domain. __*Default*__: true
-  * **hostedZoneName** (<code>string</code>)  A hostedZone name to be matched with Route 53 record. __*Default*__: same as domainName
+  * **hostedZoneId** (<code>string</code>)  A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records. __*Optional*__
+  * **hostedZoneName** (<code>string</code>)  A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. Only use this if you don't provide a hostedZoneId. __*Default*__: same as domainName
   * **notificationTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
   * **notificationTypes** (<code>Array<string></code>)  Select for which notification types you want to configure a topic. __*Default*__: [Bounce, Complaint]
 
-
-### Methods
-
-
-#### getHostedZone(domainName) <a id="seeebiii-ses-verify-identities-verifysesdomain-gethostedzone"></a>
-
-
-
-```ts
-getHostedZone(domainName: string): IHostedZone
-```
-
-* **domainName** (<code>string</code>)  *No description*
-
-__Returns__:
-* <code>[aws_route53.IHostedZone](#aws-cdk-lib-aws-route53-ihostedzone)</code>
 
 
 
@@ -105,7 +92,8 @@ Name | Type | Description
 **addDkimRecords**? | <code>boolean</code> | Whether to automatically add DKIM records to the hosted zone of your domain.<br/>__*Default*__: true
 **addMxRecord**? | <code>boolean</code> | Whether to automatically add a MX record to the hosted zone of your domain.<br/>__*Default*__: true
 **addTxtRecord**? | <code>boolean</code> | Whether to automatically add a TXT record to the hosed zone of your domain.<br/>__*Default*__: true
-**hostedZoneName**? | <code>string</code> | A hostedZone name to be matched with Route 53 record.<br/>__*Default*__: same as domainName
+**hostedZoneId**? | <code>string</code> | A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records.<br/>__*Optional*__
+**hostedZoneName**? | <code>string</code> | A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. Only use this if you don't provide a hostedZoneId.<br/>__*Default*__: same as domainName
 **notificationTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
 
