@@ -1,6 +1,6 @@
 import { CfnOutput, Fn } from 'aws-cdk-lib';
 import { CnameRecord, HostedZone, IHostedZone, MxRecord, TxtRecord } from 'aws-cdk-lib/aws-route53';
-import { Topic } from 'aws-cdk-lib/aws-sns';
+import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
 import { AwsCustomResource, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
 import { EnvironmentPlaceholders } from 'aws-cdk-lib/cx-api';
 import { Construct } from 'constructs';
@@ -40,7 +40,7 @@ export interface IVerifySesDomainProps {
    * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
    * @default new topic will be created
    */
-  readonly notificationTopic?: Topic;
+  readonly notificationTopic?: ITopic;
   /**
    * Select for which notification types you want to configure a topic.
    * @default [Bounce, Complaint]
@@ -177,7 +177,7 @@ export class VerifySesDomain extends Construct {
     });
   }
 
-  private createTopicOrUseExisting(domainName: string, verifyDomainIdentity: AwsCustomResource, existingTopic?: Topic) {
+  private createTopicOrUseExisting(domainName: string, verifyDomainIdentity: AwsCustomResource, existingTopic?: ITopic): ITopic {
     const topic = existingTopic ?? new Topic(this, 'SesNotificationTopic');
     new CfnOutput(this, domainName + 'SesNotificationTopic', {
       value: topic.topicArn,
@@ -187,7 +187,7 @@ export class VerifySesDomain extends Construct {
     return topic;
   }
 
-  private addTopicToDomainIdentity(domainName: string, topic: Topic, notificationTypes?: NotificationType[]) {
+  private addTopicToDomainIdentity(domainName: string, topic: ITopic, notificationTypes?: NotificationType[]) {
     if (notificationTypes?.length) {
       notificationTypes.forEach((type) => {
         this.addSesNotificationTopicForIdentity(domainName, type, topic);
@@ -202,7 +202,7 @@ export class VerifySesDomain extends Construct {
   private addSesNotificationTopicForIdentity(
     identity: string,
     notificationType: NotificationType,
-    notificationTopic: Topic,
+    notificationTopic: ITopic,
   ): void {
     const addTopic = new AwsCustomResource(this, `Add${notificationType}Topic-${identity}`, {
       onCreate: {
