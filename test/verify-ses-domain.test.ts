@@ -1,6 +1,6 @@
-
 import * as cdk from 'aws-cdk-lib';
 import { Capture, Match, Template } from 'aws-cdk-lib/assertions';
+import { HostedZone } from 'aws-cdk-lib/aws-route53';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { VerifySesDomain } from '../src';
 
@@ -8,10 +8,13 @@ const domain = 'sub-domain.example.org';
 const hostedZoneName = 'example.org';
 const hostedZoneId = '12345';
 const zoneName = domain + '.';
-VerifySesDomain.prototype.getHostedZone = jest.fn().mockReturnValue({
+
+const mockLookup = jest.fn().mockReturnValue({
   HostedZoneId: hostedZoneId,
   zoneName: hostedZoneName,
 });
+HostedZone.fromLookup = mockLookup;
+HostedZone.fromHostedZoneAttributes = mockLookup;
 
 describe('SES domain verification', () => {
   it('ensure custom resource exists to initiate domain verification', () => {
@@ -48,6 +51,50 @@ describe('SES domain verification', () => {
     );
     template.resourceCountIs('AWS::SNS::Topic', 1);
     template.resourceCountIs('AWS::Route53::RecordSet', 0);
+  });
+
+  it('ensure hosted zone is not looked up if id is provided', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      hostedZoneId: '123',
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: false,
+    });
+
+    expect(mockLookup.mock.calls[0][2]).toEqual({ zoneName: domain, hostedZoneId: '123' });
+  });
+
+  it('ensure hosted zone is looked up by custom name if provided and id is not set', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      hostedZoneName: 'foobar',
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: false,
+    });
+
+    expect(mockLookup.mock.calls[0][2]).toEqual({ domainName: 'foobar' });
+  });
+
+  it('ensure hosted zone look up falls back to domain name', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: false,
+    });
+
+    expect(mockLookup.mock.calls[0][2]).toEqual({ domainName: domain });
   });
 
   it('ensure txt record is added', () => {
@@ -166,7 +213,8 @@ describe('SES domain verification', () => {
     const template = Template.fromStack(stack);
     template.resourceCountIs('Custom::AWS', 3);
 
-    // since we only want to have a notification topic for Bounce, we only expect one custom resource to set a notification topic
+    // since we only want to have a notification topic for Bounce, we only expect one custom resource to set a
+    // notification topic
     const c = new Capture();
     template.hasResourceProperties('Custom::AWS', {
       ServiceToken: Match.anyValue(),

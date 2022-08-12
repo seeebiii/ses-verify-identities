@@ -17,27 +17,37 @@ export interface IVerifySesDomainProps {
    */
   readonly domainName: string;
   /**
-   * A hostedZone name to be matched with Route 53 record. e.g. 'example.org'
+   * A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'.
+   * If you also provide hostedZoneId, it is assumed that these values are correct and no lookup happens.
    * @default same as domainName
    */
   readonly hostedZoneName?: string;
   /**
-   * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * Optional: A hosted zone id to be used for retrieving the Route53 hosted zone for adding new records. Providing an
+   * id will skip the hosted zone lookup.
+   */
+  readonly hostedZoneId?: string;
+  /**
+   * Whether to automatically add a TXT record to the hosed zone of your domain. This only works if your domain is
+   * managed by Route53. Otherwise disable it.
    * @default true
    */
   readonly addTxtRecord?: boolean;
   /**
-   * Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * Whether to automatically add a MX record to the hosted zone of your domain. This only works if your domain is
+   * managed by Route53. Otherwise disable it.
    * @default true
    */
   readonly addMxRecord?: boolean;
   /**
-   * Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it.
+   * Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is
+   * managed by Route53. Otherwise disable it.
    * @default true
    */
   readonly addDkimRecords?: boolean;
   /**
-   * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for all different notification types.
+   * An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic
+   * will be created and used for all different notification types.
    * @default new topic will be created
    */
   readonly notificationTopic?: ITopic;
@@ -49,38 +59,49 @@ export interface IVerifySesDomainProps {
 }
 
 /**
- * A construct to verify a SES domain identity. It initiates a domain verification and can automatically create appropriate records in Route53 to verify the domain. Also, it's possible to attach a notification topic for bounces, complaints or delivery notifications.
+ * A construct to verify a SES domain identity. It initiates a domain verification and can automatically create
+ * appropriate records in Route53 to verify the domain. Also, it's possible to attach a notification topic for bounces,
+ * complaints or delivery notifications.
  *
  * @example
  *
  * new VerifySesDomain(this, 'SesDomainVerification', {
  *   domainName: 'example.org'
  * });
- *
  */
 export class VerifySesDomain extends Construct {
   constructor(parent: Construct, name: string, props: IVerifySesDomainProps) {
     super(parent, name);
 
-    const domainName = props.domainName;
+    const {
+      domainName,
+      hostedZoneName,
+      hostedZoneId,
+      notificationTopic,
+      notificationTypes,
+      addTxtRecord,
+      addMxRecord,
+      addDkimRecords,
+    } = props;
+
     const verifyDomainIdentity = this.verifyDomainIdentity(domainName);
-    const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, props.notificationTopic);
-    this.addTopicToDomainIdentity(domainName, topic, props.notificationTypes);
+    const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, notificationTopic);
+    this.addTopicToDomainIdentity(domainName, topic, notificationTypes);
 
-    const hostedZoneName = props.hostedZoneName ? props.hostedZoneName : domainName;
-    const zone = this.getHostedZone(hostedZoneName);
+    const zone = this.getHostedZone({ name: hostedZoneName || domainName, id: hostedZoneId });
+    if (!zone) throw new Error('Can not determine hosted zone. Provide a hostedZoneName or hostedZoneId.');
 
-    if (isTrueOrUndefined(props.addTxtRecord)) {
+    if (isTrueOrUndefined(addTxtRecord)) {
       const txtRecord = this.createTxtRecordLinkingToSes(zone, domainName, verifyDomainIdentity);
       txtRecord.node.addDependency(verifyDomainIdentity);
     }
 
-    if (isTrueOrUndefined(props.addMxRecord)) {
+    if (isTrueOrUndefined(addMxRecord)) {
       const mxRecord = this.createMxRecord(zone, domainName);
       mxRecord.node.addDependency(verifyDomainIdentity);
     }
 
-    if (isTrueOrUndefined(props.addDkimRecords)) {
+    if (isTrueOrUndefined(addDkimRecords)) {
       const verifyDomainDkim = this.initDkimVerification(domainName);
       verifyDomainDkim.node.addDependency(verifyDomainIdentity);
       this.addDkimRecords(verifyDomainDkim, zone, domainName);
@@ -116,10 +137,12 @@ export class VerifySesDomain extends Construct {
     });
   }
 
-  getHostedZone(domainName: string): IHostedZone {
-    return HostedZone.fromLookup(this, 'Zone', {
-      domainName: domainName,
-    });
+  private getHostedZone({ name, id }: { name?: string; id?: string }): IHostedZone | null {
+    // if name and id are available, we can save a lookup call
+    if (name && id) return HostedZone.fromHostedZoneAttributes(this, 'Zone', { hostedZoneId: id, zoneName: name });
+    if (name) return HostedZone.fromLookup(this, 'Zone', { domainName: name });
+
+    return null;
   }
 
   private createTxtRecordLinkingToSes(zone: IHostedZone, domainName: string, verifyDomainIdentity: AwsCustomResource) {
