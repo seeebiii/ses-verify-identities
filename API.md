@@ -51,6 +51,14 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
 
 
 
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**notificationTopic** | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | The SNS topic where bounces, complaints or delivery notifications can be sent to.
+
+
 
 ## class VerifySesEmailAddress  <a id="seeebiii-ses-verify-identities-verifysesemailaddress"></a>
 
