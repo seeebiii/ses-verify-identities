@@ -70,6 +70,11 @@ export interface IVerifySesDomainProps {
  * });
  */
 export class VerifySesDomain extends Construct {
+  /**
+   * The SNS topic where bounces, complaints or delivery notifications can be sent to.
+   */
+  public readonly notificationTopic: ITopic;
+
   constructor(parent: Construct, name: string, props: IVerifySesDomainProps) {
     super(parent, name);
 
@@ -85,8 +90,8 @@ export class VerifySesDomain extends Construct {
     } = props;
 
     const verifyDomainIdentity = this.verifyDomainIdentity(domainName);
-    const topic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, notificationTopic);
-    this.addTopicToDomainIdentity(domainName, topic, notificationTypes);
+    this.notificationTopic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, notificationTopic);
+    this.addTopicToDomainIdentity(domainName, this.notificationTopic, notificationTypes);
 
     const zone = this.getHostedZone({ name: hostedZoneName || domainName, id: hostedZoneId });
     if (!zone) throw new Error('Can not determine hosted zone. Provide a hostedZoneName or hostedZoneId.');
