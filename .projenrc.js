@@ -98,15 +98,15 @@ autoMerge.addJobs({
     },
     steps: [
       {
-        uses: 'actions/checkout@v2',
+        uses: 'actions/checkout@v3',
       },
       {
         name: 'automerge',
-        uses: 'pascalgn/automerge-action@v0.13.1',
+        uses: 'pascalgn/automerge-action@v0.15.5',
         env: {
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
           MERGE_LABELS: 'dependencies,!wip,!work in progress',
-          MERGE_FILTER_AUTHOR: 'dependabot[bot]',
+          MERGE_FILTER_AUTHOR: 'seeebiii',
           MERGE_DELETE_BRANCH: 'true',
           MERGE_RETRY_SLEEP: '60000',
         },
