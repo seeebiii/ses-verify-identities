@@ -9,6 +9,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'ses-verify-identities',
+  description: 'AWS CDK constructs to verify SES identities like domains and email addresses.',
   repositoryUrl: 'git@github.com:seeebiii/ses-verify-identities.git',
 
   /* AwsCdkConstructLibraryOptions */

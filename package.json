@@ -1,5 +1,6 @@
 {
   "name": "@seeebiii/ses-verify-identities",
+  "description": "AWS CDK constructs to verify SES identities like domains and email addresses.",
   "repository": {
     "type": "git",
     "url": "https://github.com/seeebiii/ses-verify-identities"
