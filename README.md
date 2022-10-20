@@ -60,6 +60,7 @@ new VerifySesDomain(this, 'SesDomainVerification', {
  * `addDkimRecord` Whether to automatically add DKIM records to the hosted zone of your domain. This only works if your domain is managed by Route53. Otherwise disable it. Default: `true`.
  * `notificationTopic` An SNS topic where bounces, complaints or delivery notifications can be sent to. If none is provided, a new topic will be created and used for provided notification types.
  * `notificationTypes` Select for which notification types you want to configure a topic. Default: `[Bounce, Complaint]`.
+ * `removalPolicy` Set a `RemovalPolicy` if you want to retain the resources. Default: `DESTROY`
 
 ### Verify an Email Address
 
@@ -73,6 +74,7 @@ new VerifySesEmailAddress(this, 'SesEmailVerification', {
 
  * `emailAddress` The email address to be verified, e.g. `hello@example.org`.
  * `region` An optional AWS region to validate the email address. Default: The custom resource will be created in the stack region.
+ * `removalPolicy` Set a `RemovalPolicy` if you want to retain the resources. Default: `DESTROY`
 
 ## Contributing
 

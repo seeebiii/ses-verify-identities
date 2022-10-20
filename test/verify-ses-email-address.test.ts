@@ -1,89 +1,129 @@
-
 import * as cdk from 'aws-cdk-lib';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { VerifySesEmailAddress } from '../src';
 
-test('ensure custom resource exists to verify email address', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'TestStack');
-  const emailAddress = 'hello@example.org';
-  const removalPolicy = RemovalPolicy.DESTROY;
+describe('verify-ses-email-address', () => {
 
-  new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
-    emailAddress: emailAddress,
-    removalPolicy,
+  test('ensure custom resource exists to verify email address', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const emailAddress = 'hello@example.org';
+
+    new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
+      emailAddress: emailAddress,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 1);
+
+    // ensure properties are as expected
+    template.hasResourceProperties('Custom::AWS', {
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'verifyEmailIdentity',
+        parameters: {
+          EmailAddress: emailAddress,
+        },
+      })),
+      Delete: Match.serializedJson({
+        service: 'SES',
+        action: 'deleteIdentity',
+        parameters: {
+          Identity: emailAddress,
+        },
+      }),
+    });
   });
 
-  // Then
-  const template = Template.fromStack(stack);
-  template.resourceCountIs('Custom::AWS', 1);
+  test('ensure custom resource exists in a custom region to verify email address', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const emailAddress = 'hello@example.org';
+    const region = 'us-east-1';
 
-  // ensure create properties are as expected
-  template.hasResourceProperties('Custom::AWS', {
-    Create: Match.serializedJson(Match.objectLike({
-      service: 'SES',
-      action: 'verifyEmailIdentity',
-      parameters: {
-        EmailAddress: emailAddress,
-      },
-    })),
-  },
-  );
+    new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
+      emailAddress: emailAddress,
+      region,
+    });
 
-  // ensure delete properties are as expected
-  template.hasResourceProperties('Custom::AWS', {
-    Delete: Match.serializedJson({
-      service: 'SES',
-      action: 'deleteIdentity',
-      parameters: {
-        Identity: emailAddress,
-      },
-    }),
-  },
-  );
-});
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 1);
 
-test('ensure custom resource exists in a custom region to verify email address', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, 'TestStack');
-  const emailAddress = 'hello@example.org';
-  const region = 'us-east-1';
-  const removalPolicy = RemovalPolicy.DESTROY;
-
-  new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
-    emailAddress: emailAddress,
-    region,
-    removalPolicy,
+    // ensure properties are as expected
+    template.hasResourceProperties('Custom::AWS', {
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'verifyEmailIdentity',
+        parameters: {
+          EmailAddress: emailAddress,
+        },
+        region,
+      })),
+      Delete: Match.serializedJson({
+        service: 'SES',
+        action: 'deleteIdentity',
+        parameters: {
+          Identity: emailAddress,
+        },
+        region,
+      }),
+    });
   });
 
-  // Then
-  const template = Template.fromStack(stack);
-  template.resourceCountIs('Custom::AWS', 1);
 
-  // ensure create properties are as expected
-  template.hasResourceProperties('Custom::AWS', {
-    Create: Match.serializedJson(Match.objectLike({
-      service: 'SES',
-      action: 'verifyEmailIdentity',
-      parameters: {
-        EmailAddress: emailAddress,
-      },
-      region,
-    })),
-  },
-  );
+  test('ensure custom resource is retained if removal policy is set', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const emailAddress = 'hello@example.org';
 
-  // ensure delete properties are as expected
-  template.hasResourceProperties('Custom::AWS', {
-    Delete: Match.serializedJson({
-      service: 'SES',
-      action: 'deleteIdentity',
-      parameters: {
-        Identity: emailAddress,
-      },
-      region,
-    }),
-  },
-  );
+    new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
+      emailAddress: emailAddress,
+      removalPolicy: RemovalPolicy.RETAIN,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 1);
+
+    // ensure create properties are as expected
+    template.hasResourceProperties('Custom::AWS', {
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'verifyEmailIdentity',
+        parameters: {
+          EmailAddress: emailAddress,
+        },
+      })),
+    });
+  });
+
+  test('ensure matches snapshot', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const emailAddress = 'hello@example.org';
+
+    new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
+      emailAddress: emailAddress,
+    });
+
+    const template = Template.fromStack(stack);
+    expect(template).toMatchSnapshot();
+  });
+
+  test('ensure matches snapshot with removal policy', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+    const emailAddress = 'hello@example.org';
+
+    new VerifySesEmailAddress(stack, 'VerifyExampleEmail', {
+      emailAddress: emailAddress,
+      removalPolicy: RemovalPolicy.RETAIN,
+    });
+
+    const template = Template.fromStack(stack);
+    expect(template).toMatchSnapshot();
+  });
 });

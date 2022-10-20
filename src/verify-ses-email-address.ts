@@ -19,7 +19,7 @@ export interface IVerifySesEmailAddressProps {
   /**
    * Whether to DESTROY or RETAIN the email address on removal.
    *
-   * @default RETAIN
+   * @default DESTROY
    */
   readonly removalPolicy?: RemovalPolicy;
 }
@@ -52,14 +52,14 @@ export class VerifySesEmailAddress extends Construct {
         physicalResourceId: PhysicalResourceId.of('verify-' + emailAddress),
         region,
       },
-      onDelete: RemovalPolicy.DESTROY == removalPolicy ? {
+      onDelete: removalPolicy === RemovalPolicy.RETAIN ? undefined : {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {
           Identity: emailAddress,
         },
         region,
-      } : undefined,
+      },
       policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity'),
     });
   }

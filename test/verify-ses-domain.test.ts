@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import { RemovalPolicy } from 'aws-cdk-lib';
 import { Capture, Match, Template } from 'aws-cdk-lib/assertions';
 import { HostedZone } from 'aws-cdk-lib/aws-route53';
 import { Topic } from 'aws-cdk-lib/aws-sns';
@@ -49,6 +50,35 @@ describe('SES domain verification', () => {
       })),
     },
     );
+    template.resourceCountIs('AWS::SNS::Topic', 1);
+    template.resourceCountIs('AWS::Route53::RecordSet', 0);
+  });
+
+  it('ensure domain is not removed if removal policy is set to retain', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      hostedZoneName,
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: false,
+      removalPolicy: RemovalPolicy.RETAIN,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    template.resourceCountIs('Custom::AWS', 3);
+    template.hasResourceProperties('Custom::AWS', {
+      Create: Match.serializedJson(Match.objectLike({
+        service: 'SES',
+        action: 'verifyDomainIdentity',
+        parameters: {
+          Domain: domain,
+        },
+      })),
+    });
     template.resourceCountIs('AWS::SNS::Topic', 1);
     template.resourceCountIs('AWS::Route53::RecordSet', 0);
   });
@@ -247,6 +277,24 @@ describe('SES domain verification', () => {
       addTxtRecord: false,
       addMxRecord: false,
       addDkimRecords: true,
+    });
+
+    // Then
+    const template = Template.fromStack(stack);
+    expect(template.toJSON()).toMatchSnapshot();
+  });
+
+  it('ensure matches snapshot with removal policy', () => {
+    const app = new cdk.App();
+    const stack = new cdk.Stack(app, 'TestStack');
+
+    new VerifySesDomain(stack, 'VerifyExampleDomain', {
+      domainName: domain,
+      notificationTypes: ['Bounce'],
+      addTxtRecord: false,
+      addMxRecord: false,
+      addDkimRecords: true,
+      removalPolicy: RemovalPolicy.RETAIN,
     });
 
     // Then

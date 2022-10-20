@@ -1,4 +1,4 @@
-import { CfnOutput, Fn } from 'aws-cdk-lib';
+import { CfnOutput, Fn, RemovalPolicy } from 'aws-cdk-lib';
 import { CnameRecord, HostedZone, IHostedZone, MxRecord, TxtRecord } from 'aws-cdk-lib/aws-route53';
 import { ITopic, Topic } from 'aws-cdk-lib/aws-sns';
 import { AwsCustomResource, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
@@ -56,6 +56,12 @@ export interface IVerifySesDomainProps {
    * @default [Bounce, Complaint]
    */
   readonly notificationTypes?: NotificationType[];
+  /**
+   * Whether to DESTROY or RETAIN the domain on removal.
+   *
+   * @default DESTROY
+   */
+  readonly removalPolicy?: RemovalPolicy;
 }
 
 /**
@@ -87,9 +93,10 @@ export class VerifySesDomain extends Construct {
       addTxtRecord,
       addMxRecord,
       addDkimRecords,
+      removalPolicy,
     } = props;
 
-    const verifyDomainIdentity = this.verifyDomainIdentity(domainName);
+    const verifyDomainIdentity = this.verifyDomainIdentity(domainName, removalPolicy);
     this.notificationTopic = this.createTopicOrUseExisting(domainName, verifyDomainIdentity, notificationTopic);
     this.addTopicToDomainIdentity(domainName, this.notificationTopic, notificationTypes);
 
@@ -113,7 +120,7 @@ export class VerifySesDomain extends Construct {
     }
   }
 
-  private verifyDomainIdentity(domainName: string): AwsCustomResource {
+  private verifyDomainIdentity(domainName: string, removalPolicy?: RemovalPolicy): AwsCustomResource {
     return new AwsCustomResource(this, 'VerifyDomainIdentity', {
       onCreate: {
         service: 'SES',
@@ -131,7 +138,7 @@ export class VerifySesDomain extends Construct {
         },
         physicalResourceId: PhysicalResourceId.fromResponse('VerificationToken'),
       },
-      onDelete: {
+      onDelete: removalPolicy === RemovalPolicy.RETAIN ? undefined : {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {

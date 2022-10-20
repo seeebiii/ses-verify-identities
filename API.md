@@ -48,6 +48,7 @@ new VerifySesDomain(parent: Construct, name: string, props: IVerifySesDomainProp
   * **hostedZoneName** (<code>string</code>)  A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. If you also provide hostedZoneId, it is assumed that these values are correct and no lookup happens. __*Default*__: same as domainName
   * **notificationTopic** (<code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code>)  An SNS topic where bounces, complaints or delivery notifications can be sent to. __*Default*__: new topic will be created
   * **notificationTypes** (<code>Array<string></code>)  Select for which notification types you want to configure a topic. __*Default*__: [Bounce, Complaint]
+  * **removalPolicy** (<code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code>)  Whether to DESTROY or RETAIN the domain on removal. __*Default*__: DESTROY
 
 
 
@@ -83,7 +84,7 @@ new VerifySesEmailAddress(parent: Construct, name: string, props: IVerifySesEmai
 * **props** (<code>[IVerifySesEmailAddressProps](#seeebiii-ses-verify-identities-iverifysesemailaddressprops)</code>)  *No description*
   * **emailAddress** (<code>string</code>)  The email address to be verified, e.g. 'hello@example.org'. 
   * **region** (<code>string</code>)  An optional AWS region to validate the email address. __*Default*__: The custom resource will be created in the stack region
-  * **removalPolicy** (<code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code>)  Whether to DESTROY or RETAIN the email address on removal. __*Default*__: RETAIN
+  * **removalPolicy** (<code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code>)  Whether to DESTROY or RETAIN the email address on removal. __*Default*__: DESTROY
 
 
 
@@ -105,6 +106,7 @@ Name | Type | Description
 **hostedZoneName**? | <code>string</code> | A hosted zone name to be used for retrieving the Route53 hosted zone for adding new record, e.g. 'example.org'. If you also provide hostedZoneId, it is assumed that these values are correct and no lookup happens.<br/>__*Default*__: same as domainName
 **notificationTopic**? | <code>[aws_sns.ITopic](#aws-cdk-lib-aws-sns-itopic)</code> | An SNS topic where bounces, complaints or delivery notifications can be sent to.<br/>__*Default*__: new topic will be created
 **notificationTypes**? | <code>Array<string></code> | Select for which notification types you want to configure a topic.<br/>__*Default*__: [Bounce, Complaint]
+**removalPolicy**? | <code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code> | Whether to DESTROY or RETAIN the domain on removal.<br/>__*Default*__: DESTROY
 
 
 
@@ -119,7 +121,7 @@ Name | Type | Description
 -----|------|-------------
 **emailAddress** | <code>string</code> | The email address to be verified, e.g. 'hello@example.org'.
 **region**? | <code>string</code> | An optional AWS region to validate the email address.<br/>__*Default*__: The custom resource will be created in the stack region
-**removalPolicy**? | <code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code> | Whether to DESTROY or RETAIN the email address on removal.<br/>__*Default*__: RETAIN
+**removalPolicy**? | <code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code> | Whether to DESTROY or RETAIN the email address on removal.<br/>__*Default*__: DESTROY
 
 
 
