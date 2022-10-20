@@ -1,3 +1,4 @@
+import { RemovalPolicy } from 'aws-cdk-lib';
 import { AwsCustomResource, PhysicalResourceId } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 import { generateSesPolicyForCustomResource } from './helper';
@@ -15,6 +16,12 @@ export interface IVerifySesEmailAddressProps {
    * @default The custom resource will be created in the stack region
    */
   readonly region?: string;
+  /**
+   * Whether to DESTROY or RETAIN the email address on removal.
+   *
+   * @default RETAIN
+   */
+  readonly removalPolicy?: RemovalPolicy;
 }
 
 /**
@@ -33,6 +40,7 @@ export class VerifySesEmailAddress extends Construct {
 
     const emailAddress = props.emailAddress;
     const region = props.region;
+    const removalPolicy = props.removalPolicy;
 
     new AwsCustomResource(this, 'VerifyEmailIdentity' + emailAddress, {
       onCreate: {
@@ -44,14 +52,14 @@ export class VerifySesEmailAddress extends Construct {
         physicalResourceId: PhysicalResourceId.of('verify-' + emailAddress),
         region,
       },
-      onDelete: {
+      onDelete: RemovalPolicy.DESTROY == removalPolicy ? {
         service: 'SES',
         action: 'deleteIdentity',
         parameters: {
           Identity: emailAddress,
         },
         region,
-      },
+      } : undefined,
       policy: generateSesPolicyForCustomResource('VerifyEmailIdentity', 'DeleteIdentity'),
     });
   }

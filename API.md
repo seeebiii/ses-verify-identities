@@ -83,6 +83,7 @@ new VerifySesEmailAddress(parent: Construct, name: string, props: IVerifySesEmai
 * **props** (<code>[IVerifySesEmailAddressProps](#seeebiii-ses-verify-identities-iverifysesemailaddressprops)</code>)  *No description*
   * **emailAddress** (<code>string</code>)  The email address to be verified, e.g. 'hello@example.org'. 
   * **region** (<code>string</code>)  An optional AWS region to validate the email address. __*Default*__: The custom resource will be created in the stack region
+  * **removalPolicy** (<code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code>)  Whether to DESTROY or RETAIN the email address on removal. __*Default*__: RETAIN
 
 
 
@@ -118,6 +119,7 @@ Name | Type | Description
 -----|------|-------------
 **emailAddress** | <code>string</code> | The email address to be verified, e.g. 'hello@example.org'.
 **region**? | <code>string</code> | An optional AWS region to validate the email address.<br/>__*Default*__: The custom resource will be created in the stack region
+**removalPolicy**? | <code>[RemovalPolicy](#aws-cdk-lib-removalpolicy)</code> | Whether to DESTROY or RETAIN the email address on removal.<br/>__*Default*__: RETAIN
 
 
 
